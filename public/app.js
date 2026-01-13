@@ -5,7 +5,7 @@ let allProducts = [];
 document.addEventListener('DOMContentLoaded', async () => {
   // Load all products first
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch(apiUrl('/api/products'));
     allProducts = await res.json();
   } catch (err) {
     console.error('Failed to load products:', err);
@@ -107,7 +107,7 @@ function initializeOrderForm() {
 
       body.quantity = Math.max(1, parseInt(body.quantity) || 1);
 
-      const resp = await fetch('/api/orders', {
+      const resp = await fetch(apiUrl('/api/orders'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -146,7 +146,7 @@ function initializePaymentPage() {
 
   async function loadAndDisplayOrder(id) {
     try {
-      const resp = await fetch(`/api/orders/${id}`);
+      const resp = await fetch(apiUrl(`/api/orders/${id}`));
       const data = await resp.json();
 
       if (data.error) {

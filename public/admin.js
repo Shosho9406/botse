@@ -35,7 +35,7 @@
     if (!creds) return;
     const headers = { 'Authorization': 'Basic ' + b64(creds.u, creds.p) };
     try {
-      const r = await fetch('/api/admin/analytics', { headers });
+      const r = await fetch(apiUrl('/api/admin/analytics'), { headers });
       if (r.status === 401 || r.status === 403) return showLogin();
       const stats = await r.json();
       renderStats(stats);
@@ -74,7 +74,7 @@
     if (status) params.append('status', status);
     const headers = { 'Authorization': 'Basic ' + b64(creds.u, creds.p) };
     try {
-      const r = await fetch(`/api/admin/orders?${params}`, { headers });
+      const r = await fetch(apiUrl(`/api/admin/orders?${params}`), { headers });
       if (r.status === 401 || r.status === 403) return showLogin();
       const list = await r.json();
       renderOrders(list);
@@ -115,7 +115,7 @@
         const creds = getCreds();
         const headers = { 'Authorization': 'Basic ' + b64(creds.u, creds.p), 'Content-Type': 'application/json' };
         try {
-          const r = await fetch(`/api/orders/${id}/pay`, { method: 'POST', headers, body: JSON.stringify({ amount: 0 }) });
+          const r = await fetch(apiUrl(`/api/orders/${id}/pay`), { method: 'POST', headers, body: JSON.stringify({ amount: 0 }) });
           if (!r.ok) throw new Error('Failed');
           alert('Order marked as paid');
           fetchOrders(searchBox.value, statusFilter.value);
@@ -159,7 +159,7 @@
     // Try to authenticate by fetching orders
     const headers = { 'Authorization': 'Basic ' + btoa(u + ':' + p) };
     try {
-      const r = await fetch('/api/admin/orders', { headers });
+      const r = await fetch(apiUrl('/api/admin/orders'), { headers });
       if (r.status === 401 || r.status === 403) {
         alert('Invalid username or password');
         return;
@@ -197,7 +197,7 @@
     if (!creds) return alert('Not authenticated');
     const headers = { 'Authorization': 'Basic ' + b64(creds.u, creds.p) };
     try {
-      const r = await fetch('/api/admin/orders/export/csv', { headers });
+      const r = await fetch(apiUrl('/api/admin/orders/export/csv'), { headers });
       if (!r.ok) throw new Error('Export failed');
       const csv = await r.text();
       const blob = new Blob([csv], { type: 'text/csv' });
