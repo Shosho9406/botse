@@ -1,5 +1,11 @@
 {
-  "buildCommand": "npm install",
+  "buildCommand": "",
+  "outputDirectory": "public",
   "framework": "static",
-  "public": "public"
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
