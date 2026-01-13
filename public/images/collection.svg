@@ -1,0 +1,47 @@
+<svg width="1200" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fde2e6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8b6c3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- Beanie 1 (Left) -->
+  <circle cx="250" cy="250" r="80" fill="#d4a574"/>
+  <ellipse cx="250" cy="180" rx="85" ry="60" fill="#c9935a"/>
+  <path d="M 180 240 Q 180 300 250 320 Q 320 300 320 240" fill="#b8824a"/>
+  
+  <!-- Beanie 2 (Center - Featured) -->
+  <circle cx="600" cy="200" r="100" fill="#9b7d6b"/>
+  <ellipse cx="600" cy="90" rx="105" ry="75" fill="#8a6d5a"/>
+  <path d="M 510 190 Q 510 280 600 310 Q 690 280 690 190" fill="#7a5d4a"/>
+  
+  <!-- Beanie 3 (Right) -->
+  <circle cx="950" cy="250" r="80" fill="#e8a87c"/>
+  <ellipse cx="950" cy="180" rx="85" ry="60" fill="#dh9763"/>
+  <path d="M 880 240 Q 880 300 950 320 Q 1020 300 1020 240" fill="#c68752"/>
+  
+  <!-- Scrunchie 1 -->
+  <circle cx="200" cy="450" r="30" fill="#f8b6c3" stroke="#d4a5b0" stroke-width="3"/>
+  <circle cx="200" cy="450" r="22" fill="none" stroke="#f8b6c3" stroke-width="4" opacity="0.6"/>
+  
+  <!-- Scrunchie 2 -->
+  <circle cx="600" cy="480" r="35" fill="#f5a8b8" stroke="#d4a5b0" stroke-width="3"/>
+  <circle cx="600" cy="480" r="25" fill="none" stroke="#f5a8b8" stroke-width="4" opacity="0.6"/>
+  
+  <!-- Scrunchie 3 -->
+  <circle cx="1000" cy="450" r="30" fill="#f8b6c3" stroke="#d4a5b0" stroke-width="3"/>
+  <circle cx="1000" cy="450" r="22" fill="none" stroke="#f8b6c3" stroke-width="4" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="600" y="560" font-family="Poppins, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#222">
+    Botse by Masego Collection
+  </text>
+  <text x="600" y="590" font-family="Poppins, sans-serif" font-size="18" text-anchor="middle" fill="#555">
+    Handmade Slouchy Beanies & Scrunchies
+  </text>
+</svg>
