@@ -2,7 +2,14 @@
 
 A full-featured e-commerce platform for Botse by Masego, showcasing handmade slouchy beanies and scrunchies. Built with Express.js backend and SQLite database for order management.
 
-## 🚀 Quick Start with PM2 (Windows PowerShell)
+## � Deployment Guides
+
+Choose your deployment strategy:
+
+- **[Vercel + Lambda + API Gateway](./DEPLOYMENT_LAMBDA_GATEWAY.md)** ⭐ **RECOMMENDED** - $0-5/month, serverless, zero downtime
+- [Vercel + Elastic Beanstalk](./DEPLOYMENT_VERCEL_AWS.md) - $10-30/month, managed VMs
+
+## �🚀 Quick Start with PM2 (Windows PowerShell)
 
 PM2 automatically restarts the server if it crashes and provides reliable process management.
 
