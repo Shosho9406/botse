@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Botse by Masego</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #d4a5b0;
+      padding: 1.2rem;
+      color: #222;
+    }
+    .card {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    }
+    h1 { margin-bottom: 1.5rem; }
+    
+    .header-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    
+    .header-section h1 {
+      margin-bottom: 0;
+      font-size: 2rem;
+    }
+    
+    .header-section p {
+      color: #666;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    .welcome-message {
+      background: linear-gradient(135deg, #c7758a, #b85c7e);
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    
+    .welcome-message h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .welcome-message p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .controls input { padding: 0.5rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; flex: 1; min-width: 200px; }
+    .controls select { padding: 0.5rem 0.8rem; border: 1px solid #ddd; border-radius: 6px; }
+    .btn {
+      background: linear-gradient(135deg, #333, #555);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    .btn:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #222, #444);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary { 
+      background: linear-gradient(135deg, #6c757d, #8898a1);
+    }
+    .btn.secondary:hover { 
+      background: linear-gradient(135deg, #5a6268, #788491);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 117, 125, 0.25);
+    }
+    .btn.export-btn { 
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
+    .btn.export-btn:hover { 
+      background: linear-gradient(135deg, #218838, #1aa179);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    .login-section { max-width: 500px; margin: 0 auto; }
+    .login-section label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    .login-section input { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px; }
+    .muted { color: #666; font-size: 0.9rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th { background: #f8f8f8; font-weight: 600; }
+    tr:hover { background: #fafafa; }
+    .status-paid { color: #28a745; font-weight: 600; }
+    .status-pending { color: #ff6b6b; }
+    .status-completed { color: #007bff; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-box {
+      background: #f8f8f8;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid #c7758a;
+    }
+    .stat-box h3 { font-size: 0.9rem; color: #666; margin-bottom: 0.5rem; }
+    .stat-box .value { font-size: 1.8rem; font-weight: 700; }
+    
+    @media (max-width: 768px) {
+      body { padding: 1.5rem 1rem; }
+      .card { padding: 1.5rem; border-radius: 12px; }
+      .header-section { flex-direction: column; text-align: center; }
+      .header-section h1 { font-size: 1.5rem; }
+      .controls { flex-direction: column; gap: 0.8rem; }
+      .controls input { width: 100%; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.5rem; }
+      .stats { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem 0.8rem; }
+      .card { padding: 1rem; border-radius: 10px; }
+      h1 { font-size: 1.2rem; margin-bottom: 1rem; }
+      .header-section h1 { font-size: 1.2rem; }
+      .welcome-message { padding: 1rem; margin-bottom: 1.5rem; }
+      .welcome-message h2 { font-size: 1.2rem; }
+      .controls { flex-direction: column; gap: 0.6rem; }
+      .controls input { width: 100%; font-size: 0.9rem; }
+      .btn { padding: 0.6rem 1rem; font-size: 0.85rem; }
+      table { font-size: 0.75rem; }
+      th, td { padding: 0.3rem; }
+      .stats { grid-template-columns: 1fr; gap: 1rem; }
+      .stat-box { padding: 0.8rem; }
+      .stat-box .value { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="loginArea">
+      <div style="max-width: 500px; margin: 0 auto; text-align: center; padding: 2rem 0;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: #c7758a;">Botse Admin</h1>
+        <p style="color: #666; margin-bottom: 2rem; font-size: 1rem;">Manage your orders and track your business</p>
+        
+        <div class="login-section" style="background: #f8f8f8; padding: 2rem; border-radius: 12px; text-align: left;">
+          <p style="margin-bottom: 1.5rem; color: #666; text-align: center;">Enter your admin credentials</p>
+          <label>Username</label>
+          <input id="username" placeholder="Your username" />
+          <label>Password</label>
+          <input id="password" type="password" placeholder="Your password" />
+          <button id="loginBtn" class="btn" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">Login to Dashboard</button>
+          <p class="muted" style="margin-top: 1.5rem; text-align: center;">Secure authentication required</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="ordersArea" style="display:none;">
+      <div class="header-section">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Manage and track all your orders</p>
+        </div>
+        <button id="logoutBtn" class="btn secondary">Logout</button>
+      </div>
+      
+      <div class="welcome-message" id="welcomeMessage">
+        <h2>Welcome!</h2>
+        <p>Here's your business overview</p>
+      </div>
+
+      <!-- Statistics -->
+      <div id="stats" class="stats"></div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <input id="searchBox" type="text" placeholder="Search by order ID, name, phone, or product..." />
+        <select id="statusFilter">
+          <option value="">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
+          <option value="completed">Completed</option>
+        </select>
+        <button id="refreshBtn" class="btn">Refresh</button>
+        <button id="exportBtn" class="btn export-btn">Export CSV</button>
+      </div>
+
+      <!-- Orders Table -->
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Product</th>
+              <th>Variant</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Total</th>
+              <th>Deposit</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTbody">
+            <tr><td colspan="9" style="text-align: center; color: #999;">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/api-config.js"></script>
+  <script src="/admin.js"></script>
+</body>
+</html>

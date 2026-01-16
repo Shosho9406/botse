@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Botse by Masego</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #d4a5b0;
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      background: #c7758a;
+      padding: 2.5rem 1rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2.5rem; font-weight: 700; }
+    header p { margin-top: .5rem; font-size: 1.1rem; }
+    
+    nav {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    nav a:active {
+      transform: translateY(0);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 3rem 1.2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .card h3 { margin-bottom: .8rem; font-size: 1.2rem; }
+    .card ul { list-style: none; }
+    .card li { margin-bottom: .4rem; }
+
+    .price { font-weight: 600; }
+
+    .highlight {
+      background: #d9899e;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .cta {
+      background: #c7758a;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .cta h2 { margin-bottom: 1rem; }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 1rem 2.2rem;
+      background: linear-gradient(135deg, #9d1f47, #c7758a);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(157, 31, 71, 0.3);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(157, 31, 71, 0.4);
+      background: linear-gradient(135deg, #8a1636, #b85c7e);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: .9rem;
+    }
+
+    /* order form */
+    .order-form { max-width: 700px; margin: 1.5rem auto; background: #fff; padding: 1.2rem; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,.06);} 
+    .order-form label { display:block; margin-bottom: .3rem; font-weight:600; }
+    .order-form input, .order-form select, .order-form textarea { width:100%; padding:.6rem; margin-bottom:.8rem; border-radius:8px; border:1px solid #eee; }
+    .order-form button { background:linear-gradient(135deg, #9d1f47, #c7758a); color:#fff; padding:.8rem 1.2rem; border-radius: 10px; border:none; cursor:pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(157, 31, 71, 0.25); }
+    .order-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(157, 31, 71, 0.35); background: linear-gradient(135deg, #8a1636, #b85c7e); }
+    .muted { font-size:.9rem; color:#666; }
+
+    /* Mobile responsive design */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p { font-size: 0.95rem; }
+      section { padding: 2rem 1rem; }
+      .section-title { font-size: 1.5rem; margin-bottom: 1rem; }
+      .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+      .card { padding: 1rem; }
+      nav a { padding: 0.6rem 1rem; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 1.5rem 0.8rem; }
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 0.85rem; }
+      nav { gap: 0.5rem; margin-top: 1rem; }
+      nav a { padding: 0.5rem 0.8rem; font-size: 0.8rem; border-radius: 20px; }
+      section { padding: 1.5rem 0.8rem; }
+      .section-title { font-size: 1.2rem; }
+      .grid { grid-template-columns: 1fr; gap: 0.8rem; }
+      .card { padding: 0.8rem; border-radius: 12px; }
+      .card h3 { font-size: 1rem; }
+      .cta { padding: 2rem 0.8rem; }
+      .btn { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BOTSE BY MASEGO</h1>
+  <p>Colorful crochet essentials for You</p>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/order.html">Order</a>
+    <a href="/payment.html">Payment</a>
+  </nav>
+</header>
+<div style="max-width:1100px;margin:1rem auto;padding:0 1rem;text-align:center;">
+  <!-- Featured image showing Botse collection -->
+  <img src="/images/collection.jpg" alt="Botse collection - handmade beanies and scrunchies" style="max-width:100%;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.08);" />
+</div>
+
+<section>
+  <h2 class="section-title">Slouchy Beanies</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Open Slouchy</h3>
+      <ul>
+        <li>One colour – <span class="price">R120</span></li>
+        <li>Two colours – <span class="price">R150</span></li>
+        <li>Three colours – <span class="price">R180</span></li>
+        <li>Custom colour – <span class="price">R200</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Normal Slouchy</h3>
+      <ul>
+        <li>One colour – <span class="price">R180</span></li>
+        <li>Two colours – <span class="price">R200</span></li>
+        <li>Three colours – <span class="price">R230</span></li>
+        <li>Custom colours – <span class="price">R280</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Big Slouchy</h3>
+      <ul>
+        <li>One colour – <span class="price">R250</span></li>
+        <li>Two colours – <span class="price">R270</span></li>
+        <li>Three colours – <span class="price">R290</span></li>
+        <li>Custom colours – <span class="price">R320</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:2rem;">
+    <p><strong>Customisation:</strong> Add stars, hearts & more from <strong>R20+</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Scrunchies</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Small Size</h3>
+      <p>Only <span class="price">R15</span> for a trendy accessory.</p>
+    </div>
+    <div class="card">
+      <h3>Medium Size</h3>
+      <p>Grab yours for <span class="price">R35</span> and elevate your style.</p>
+    </div>
+    <div class="card">
+      <h3>Large Size</h3>
+      <p>Get yours for only <span class="price">R50</span>.</p>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:2rem;">
+    <p>Extra colours: <strong>+R10</strong> (Small & Medium) | <strong>+R20</strong> (Large)</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Policy</h2>
+  <div style="max-width:800px;margin:0 auto;background:#fff;padding:2rem;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.06);">
+    <ol style="padding-left:1.5rem;line-height:1.8;font-size:1.05rem;">
+      <li><strong>Place Your Order</strong> — Browse our products and submit your order with your preferred colours and specifications.</li>
+      <li><strong>Pay 50% Deposit</strong> — Send a non-refundable 50% deposit to the account number provided on the payment page to secure your order.</li>
+      <li><strong>Rush Orders</strong> — Orders due in short notice will incur an additional fee. Plan ahead for the best prices.</li>
+      <li><strong>Delivery Not Included</strong> — Quoted prices do not include delivery. Shipping costs will be calculated based on your location.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Ready to Order?</h2>
+  <div style="text-align:center;">
+    <p style="margin-bottom:1rem;">Start browsing our collection and place your order today.</p>
+    <a href="/order.html" class="btn">Place Your Order</a>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Order Now</h2>
+  <p>Affordable handmade accessories made just for you</p>
+  <a class="btn" href="https://wa.me/27695895793" target="_blank">WhatsApp: 069 589 5793</a>
+</section>
+
+<footer>
+  <p>© 2026 Botse by Masego — Handmade with love</p>
+  <p style="font-size:0.8rem;margin-top:0.5rem;"><a href="/admin.html" style="color:#fff;text-decoration:underline;">Admin</a></p>
+</footer>
+
+<script src="/api-config.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
