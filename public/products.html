@@ -453,7 +453,8 @@
     const products = {
       slouchy: [
         {
-          name: 'Open Slouchy',
+          name: 'Slouchy Beanie',
+          types: ['Open', 'Closed'],
           options: [
             { label: 'One colour', price: 120 },
             { label: 'Two colours', price: 150 },
@@ -497,9 +498,20 @@
           .map((opt, idx) => `<option value="${idx}">${opt.label} – R${opt.price}</option>`)
           .join('');
         
+        const typesHTML = p.types ? p.types.map(t => `<option value="${t}">${t}</option>`).join('') : '';
+        
         card.innerHTML = `
           <h3>${p.name}</h3>
           <div class="product-select">
+            ${p.types ? `
+            <div class="option-selector">
+              <label>Slouchy Type:</label>
+              <select class="product-type">
+                <option value="">Choose type...</option>
+                ${typesHTML}
+              </select>
+            </div>
+            ` : ''}
             <div class="option-selector">
               <label>Select option:</label>
               <select class="product-option" data-product="${p.name}">
@@ -525,6 +537,7 @@
         const optSelect = card.querySelector('.product-option');
         const qtySelect = card.querySelector('.product-quantity');
         const customSelect = card.querySelector('.product-customization');
+        const typeSelect = card.querySelector('.product-type');
         
         btn.addEventListener('click', () => {
           const optIdx = optSelect.value;
@@ -536,18 +549,25 @@
           const option = p.options[optIdx];
           const quantity = parseInt(qtySelect.value);
           const customization = customSelect.value.trim();
+          const type = typeSelect ? typeSelect.value : '';
           
-          addToCart(p.name, option.label, option.price, quantity, customization);
+          if (typeSelect && !type) {
+            alert('Please select slouchy type (Open or Closed)');
+            return;
+          }
+          
+          addToCart(p.name, option.label, option.price, quantity, customization, type);
         });
         
         container.appendChild(card);
       });
     }
 
-    function addToCart(productName, optionLabel, price, quantity, customization) {
+    function addToCart(productName, optionLabel, price, quantity, customization, type) {
       const item = {
         id: cartId++,
         product: productName,
+        type: type,
         option: optionLabel,
         price: price,
         quantity: quantity,
@@ -580,7 +600,7 @@
       cartContainer.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div class="cart-item-details">
-            <div class="cart-item-name">${item.product}</div>
+            <div class="cart-item-name">${item.product} ${item.type ? `(${item.type})` : ''}</div>
             <div class="cart-item-option">${item.option} x${item.quantity}</div>
             ${item.customization ? `<div class="cart-item-custom" style="font-size: 0.85rem; color: #c7758a; margin-top: 0.3rem;">🎨 ${item.customization}</div>` : ''}
           </div>
@@ -602,7 +622,7 @@
       let total = 0;
 
       cart.forEach(item => {
-        orderText += `• ${item.product}\n`;
+        orderText += `• ${item.product}${item.type ? ` (${item.type})` : ''}\n`;
         orderText += `  ${item.option}\n`;
         orderText += `  Qty: ${item.quantity} x R${item.price} = R${item.total}\n`;
         if (item.customization) {
