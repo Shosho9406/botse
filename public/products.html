@@ -300,6 +300,161 @@
       margin: 1rem 0;
       font-size: 0.95rem;
     }
+
+    /* Confirmation Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 90%;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #333;
+      text-align: center;
+    }
+
+    .modal-summary {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .modal-summary-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .modal-summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .modal-summary-item-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-summary-item-details {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.2rem;
+    }
+
+    .modal-summary-item-custom {
+      font-size: 0.85rem;
+      color: #c7758a;
+      font-style: italic;
+      margin-top: 0.3rem;
+    }
+
+    .modal-payment-section {
+      background: #fff3f6;
+      border-left: 4px solid #c7758a;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 6px;
+    }
+
+    .modal-payment-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .modal-payment-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-payment-label {
+      color: #666;
+    }
+
+    .modal-payment-amount {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .modal-payment-line.total {
+      border-top: 2px solid #c7758a;
+      padding-top: 0.6rem;
+      margin-top: 0.8rem;
+      font-size: 1.05rem;
+    }
+
+    .modal-payment-line.deposit {
+      color: #c7758a;
+    }
+
+    .modal-payment-line.remaining {
+      color: #333;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 0.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-confirm-btn {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .modal-confirm-btn:hover {
+      background: #20ba5a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .modal-cancel-btn {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .modal-cancel-btn:hover {
+      background: #d0d0d0;
+      transform: translateY(-2px);
+    }
     
     .cta-section {
       background: linear-gradient(135deg, #c7758a, #b85c7e);
@@ -443,6 +598,41 @@
       <h2>Ready to Order?</h2>
       <p>Choose your favorite product and create something unique</p>
       <a href="/order.html" class="cta-btn">Place an Order Now</a>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmation-modal" class="modal-overlay">
+    <div class="modal-box">
+      <h2 class="modal-title">📋 Order Confirmation</h2>
+      
+      <div class="modal-summary" id="modal-items">
+        <!-- Items will be populated here -->
+      </div>
+
+      <div class="modal-payment-section">
+        <div class="modal-payment-line total">
+          <span class="modal-payment-label">Order Total:</span>
+          <span class="modal-payment-amount" id="modal-total">R0</span>
+        </div>
+        <div class="modal-payment-line deposit">
+          <span class="modal-payment-label">50% Deposit Required:</span>
+          <span class="modal-payment-amount" id="modal-deposit">R0</span>
+        </div>
+        <div class="modal-payment-line remaining">
+          <span class="modal-payment-label">Remaining Balance:</span>
+          <span class="modal-payment-amount" id="modal-remaining">R0</span>
+        </div>
+      </div>
+
+      <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 1.5rem;">
+        ✓ This will open WhatsApp to send your order
+      </p>
+
+      <div class="modal-actions">
+        <button class="modal-confirm-btn" id="modal-confirm">Continue to WhatsApp</button>
+        <button class="modal-cancel-btn" id="modal-cancel">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -635,6 +825,32 @@
 
     function sendOrderToWhatsApp() {
       if (cart.length === 0) return;
+      
+      // Populate modal with order summary
+      const modalItems = document.getElementById('modal-items');
+      modalItems.innerHTML = cart.map(item => `
+        <div class="modal-summary-item">
+          <div class="modal-summary-item-name">${item.product}${item.type ? ` (${item.type})` : ''}</div>
+          <div class="modal-summary-item-details">${item.option}</div>
+          <div class="modal-summary-item-details">Qty: ${item.quantity} x R${item.price} = R${item.total}</div>
+          ${item.customization ? `<div class="modal-summary-item-custom">🎨 ${item.customization}</div>` : ''}
+        </div>
+      `).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.total, 0);
+      const deposit = Math.round((total * 0.5) * 100) / 100;
+      const remaining = total - deposit;
+
+      document.getElementById('modal-total').textContent = `R${total}`;
+      document.getElementById('modal-deposit').textContent = `R${deposit}`;
+      document.getElementById('modal-remaining').textContent = `R${remaining}`;
+
+      // Show modal
+      document.getElementById('confirmation-modal').classList.add('active');
+    }
+
+    function confirmAndSendToWhatsApp() {
+      if (cart.length === 0) return;
 
       let orderText = '*Order Summary*\n\n';
       let total = 0;
@@ -661,12 +877,30 @@
 
       const encodedMessage = encodeURIComponent(orderText);
       const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+      
+      // Close modal
+      document.getElementById('confirmation-modal').classList.remove('active');
+      
+      // Open WhatsApp
       window.open(whatsappURL, '_blank');
+    }
+
+    function closeModal() {
+      document.getElementById('confirmation-modal').classList.remove('active');
     }
 
     // Event listener for send button
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('send-order-btn').addEventListener('click', sendOrderToWhatsApp);
+      document.getElementById('modal-confirm').addEventListener('click', confirmAndSendToWhatsApp);
+      document.getElementById('modal-cancel').addEventListener('click', closeModal);
+      
+      // Close modal if clicking outside the modal-box
+      document.getElementById('confirmation-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'confirmation-modal') {
+          closeModal();
+        }
+      });
     });
 
     // Display products on page load
