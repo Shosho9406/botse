@@ -262,6 +262,17 @@
       font-size: 0.9rem;
     }
 
+    .option-selector textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      resize: vertical;
+      min-height: 60px;
+    }
+
     .add-to-cart-btn {
       display: inline-block;
       width: 100%;
@@ -437,7 +448,7 @@
   </footer>
 
   <script>
-    const WHATSAPP_NUMBER = '27695895793';
+    const WHATSAPP_NUMBER = '27695895793'; // Your WhatsApp number in international format without '+'
     
     const products = {
       slouchy: [
@@ -502,6 +513,10 @@
                 ${Array.from({length: 10}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
               </select>
             </div>
+            <div class="option-selector">
+              <label>Colors / Customization:</label>
+              <textarea class="product-customization" placeholder="e.g., Red and blue, or specify exact colors you want..."></textarea>
+            </div>
           </div>
           <button class="add-to-cart-btn">Add to Cart</button>
         `;
@@ -509,6 +524,7 @@
         const btn = card.querySelector('.add-to-cart-btn');
         const optSelect = card.querySelector('.product-option');
         const qtySelect = card.querySelector('.product-quantity');
+        const customSelect = card.querySelector('.product-customization');
         
         btn.addEventListener('click', () => {
           const optIdx = optSelect.value;
@@ -519,21 +535,23 @@
           
           const option = p.options[optIdx];
           const quantity = parseInt(qtySelect.value);
+          const customization = customSelect.value.trim();
           
-          addToCart(p.name, option.label, option.price, quantity);
+          addToCart(p.name, option.label, option.price, quantity, customization);
         });
         
         container.appendChild(card);
       });
     }
 
-    function addToCart(productName, optionLabel, price, quantity) {
+    function addToCart(productName, optionLabel, price, quantity, customization) {
       const item = {
         id: cartId++,
         product: productName,
         option: optionLabel,
         price: price,
         quantity: quantity,
+        customization: customization,
         total: price * quantity
       };
       
@@ -564,6 +582,7 @@
           <div class="cart-item-details">
             <div class="cart-item-name">${item.product}</div>
             <div class="cart-item-option">${item.option} x${item.quantity}</div>
+            ${item.customization ? `<div class="cart-item-custom" style="font-size: 0.85rem; color: #c7758a; margin-top: 0.3rem;">🎨 ${item.customization}</div>` : ''}
           </div>
           <div class="cart-item-price">R${item.total}</div>
           <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
@@ -585,7 +604,11 @@
       cart.forEach(item => {
         orderText += `• ${item.product}\n`;
         orderText += `  ${item.option}\n`;
-        orderText += `  Qty: ${item.quantity} x R${item.price} = R${item.total}\n\n`;
+        orderText += `  Qty: ${item.quantity} x R${item.price} = R${item.total}\n`;
+        if (item.customization) {
+          orderText += `  🎨 Customization: ${item.customization}\n`;
+        }
+        orderText += `\n`;
         total += item.total;
       });
 
