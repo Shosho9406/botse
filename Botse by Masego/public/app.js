@@ -1,35 +1,14 @@
 // Global products reference
 let allProducts = [];
 
-// Assuming apiUrl is defined elsewhere as a function, e.g.:
-// const apiUrl = (path) => 'https://your-api-domain.com' + path;
-// If not, replace apiUrl('/api/products') with your full URL, like 'https://your-api-domain.com/api/products'
-
+// Client-side JS to handle orders and payments
 document.addEventListener('DOMContentLoaded', async () => {
   // Load all products first
   try {
     const res = await fetch(apiUrl('/api/products'));
-    
-    // Check if the response is OK (status 200-299)
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status} - ${res.statusText}. Response: ${await res.text()}`);
-    }
-    
-    // Check if the response is JSON (based on Content-Type header)
-    const contentType = res.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await res.text();  // Get the raw response
-      throw new Error(`Expected JSON but got ${contentType || 'unknown'}. Response: ${text}`);
-    }
-    
     allProducts = await res.json();
-    console.log('Products loaded successfully:', allProducts);  // Optional: Log for debugging
   } catch (err) {
     console.error('Failed to load products:', err);
-    // Optional: Show a user-friendly message on the page
-    // e.g., document.getElementById('error-message').textContent = 'Unable to load products. Please try again later.';
-  }
-});
   }
 
   // Handle order form (order.html)

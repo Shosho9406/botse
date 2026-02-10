@@ -134,10 +134,153 @@
       transition: background 0.2s;
     }
     
-    .card a:hover {
-      background: #444;
+    .cart-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+      position: sticky;
+      top: 20px;
     }
-    
+
+    .cart-container h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .cart-items {
+      margin-bottom: 1.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      background: #f5f5f5;
+      padding: 0.8rem;
+      margin-bottom: 0.8rem;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .cart-item-option {
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    .cart-item-price {
+      font-weight: 700;
+      color: #c7758a;
+      margin-right: 1rem;
+    }
+
+    .remove-item {
+      background: #ff6b6b;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+    }
+
+    .remove-item:hover {
+      background: #ff5252;
+    }
+
+    .cart-total {
+      border-top: 2px solid #ddd;
+      padding-top: 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .cart-empty {
+      text-align: center;
+      color: #999;
+      padding: 1rem;
+    }
+
+    .send-order-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .send-order-btn:hover {
+      background: #20ba5a;
+    }
+
+    .send-order-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .product-select {
+      margin-bottom: 1rem;
+    }
+
+    .option-selector {
+      margin-bottom: 0.8rem;
+    }
+
+    .option-selector label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .option-selector select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .add-to-cart-btn {
+      display: inline-block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background: #c7758a;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #b85c7e;
+    }
+
     .customization-note {
       background: #d9899e;
       border-left: 4px solid #c7758a;
@@ -214,6 +357,13 @@
       .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; }
       .card { padding: 0.9rem; border-radius: 12px; }
       .card h3 { font-size: 1rem; }
+      div[style*="grid-template-columns: 1fr 320px"] {
+        grid-template-columns: 1fr !important;
+      }
+      .cart-container {
+        position: static;
+        top: auto;
+      }
     }
 
     @media (max-width: 480px) {
@@ -226,6 +376,13 @@
       .card { padding: 0.8rem; border-radius: 10px; }
       .card h3 { font-size: 0.95rem; }
       .muted { font-size: 0.8rem; }
+      .cart-container {
+        margin-top: 2rem;
+        padding: 1rem;
+      }
+      .cart-items {
+        max-height: 200px;
+      }
     }
   </style>
 </head>
@@ -242,19 +399,30 @@
   </header>
 
   <div class="container">
-    <h2 class="section-title">Slouchy Beanies</h2>
-    <div id="slouchy" class="grid">
-      <div class="loading">Loading products...</div>
-    </div>
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 2rem;">
+      <div>
+        <h2 class="section-title">Slouchy Beanies</h2>
+        <div id="slouchy" class="grid"></div>
 
-    <h2 class="section-title">Scrunchies</h2>
-    <div id="scrunchies" class="grid">
-      <div class="loading">Loading products...</div>
-    </div>
+        <h2 class="section-title">Scrunchies</h2>
+        <div id="scrunchies" class="grid"></div>
 
-    <div class="customization-note">
-      <strong>🎨 Customization Available!</strong><br/>
-      All our products can be customized with additional colours, patterns, stars, hearts, and more. Contact us via WhatsApp or include your requests in the order notes!
+        <div class="customization-note">
+          <strong>🎨 Customization Available!</strong><br/>
+          All our products can be customized with additional colours, patterns, stars, hearts, and more. Contact us via WhatsApp or include your requests in the order notes!
+        </div>
+      </div>
+
+      <div class="cart-container">
+        <h3>🛒 Your Order</h3>
+        <div id="cart-items" class="cart-items">
+          <div class="cart-empty">Your cart is empty</div>
+        </div>
+        <div id="cart-total" class="cart-total" style="display: none;">
+          Total: <span id="total-price">R0</span>
+        </div>
+        <button id="send-order-btn" class="send-order-btn" disabled>Send Order to WhatsApp</button>
+      </div>
     </div>
 
     <div class="cta-section">
@@ -269,48 +437,174 @@
   </footer>
 
   <script>
-    async function loadProducts() {
-      try {
-        const res = await fetch('/api/products');
-        const products = await res.json();
-        
-        const slouchyProducts = products.filter(p => p.id.includes('slouchy'));
-        const scrunchieProducts = products.filter(p => p.id.includes('scrunchie'));
-        
-        renderProducts('slouchy', slouchyProducts);
-        renderProducts('scrunchies', scrunchieProducts);
-      } catch (err) {
-        console.error(err);
-        document.getElementById('slouchy').innerHTML = '<div class="error">Failed to load products</div>';
-        document.getElementById('scrunchies').innerHTML = '<div class="error">Failed to load products</div>';
-      }
-    }
+    const WHATSAPP_NUMBER = '27695895793';
     
-    function renderProducts(containerId, products) {
+    const products = {
+      slouchy: [
+        {
+          name: 'Open Slouchy',
+          options: [
+            { label: 'One colour', price: 120 },
+            { label: 'Two colours', price: 150 },
+            { label: 'Three colours', price: 180 },
+            { label: 'Custom colour', price: 200 }
+          ]
+        }
+      ],
+      scrunchies: [
+        {
+          name: 'Standard Scrunchie',
+          options: [
+            { label: 'One colour', price: 50 },
+            { label: 'Two colours', price: 70 },
+            { label: 'Three colours', price: 90 }
+          ]
+        },
+        {
+          name: 'Premium Scrunchie',
+          options: [
+            { label: 'One colour', price: 80 },
+            { label: 'Two colours', price: 100 },
+            { label: 'Custom design', price: 130 }
+          ]
+        }
+      ]
+    };
+
+    let cart = [];
+    let cartId = 0;
+
+    function renderProducts(containerId, productList) {
       const container = document.getElementById(containerId);
       container.innerHTML = '';
       
-      products.forEach(p => {
+      productList.forEach(p => {
         const card = document.createElement('div');
         card.className = 'card';
         
-        const priceList = Object.entries(p.prices)
-          .map(([key, value]) => {
-            const label = key.charAt(0).toUpperCase() + key.slice(1);
-            return `<li>${label} – <span class="price">R${value}</span></li>`;
-          })
+        const optionsHTML = p.options
+          .map((opt, idx) => `<option value="${idx}">${opt.label} – R${opt.price}</option>`)
           .join('');
         
         card.innerHTML = `
           <h3>${p.name}</h3>
-          <ul>${priceList}</ul>
-          <a href="/order.html">Order Now</a>
+          <div class="product-select">
+            <div class="option-selector">
+              <label>Select option:</label>
+              <select class="product-option" data-product="${p.name}">
+                <option value="">Choose an option...</option>
+                ${optionsHTML}
+              </select>
+            </div>
+            <div class="option-selector">
+              <label>Quantity:</label>
+              <select class="product-quantity">
+                ${Array.from({length: 10}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
         `;
+        
+        const btn = card.querySelector('.add-to-cart-btn');
+        const optSelect = card.querySelector('.product-option');
+        const qtySelect = card.querySelector('.product-quantity');
+        
+        btn.addEventListener('click', () => {
+          const optIdx = optSelect.value;
+          if (!optIdx) {
+            alert('Please select an option');
+            return;
+          }
+          
+          const option = p.options[optIdx];
+          const quantity = parseInt(qtySelect.value);
+          
+          addToCart(p.name, option.label, option.price, quantity);
+        });
+        
         container.appendChild(card);
       });
     }
-    
-    loadProducts();
+
+    function addToCart(productName, optionLabel, price, quantity) {
+      const item = {
+        id: cartId++,
+        product: productName,
+        option: optionLabel,
+        price: price,
+        quantity: quantity,
+        total: price * quantity
+      };
+      
+      cart.push(item);
+      updateCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartContainer = document.getElementById('cart-items');
+      const totalElement = document.getElementById('total-price');
+      const totalContainer = document.getElementById('cart-total');
+      const sendBtn = document.getElementById('send-order-btn');
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+        totalContainer.style.display = 'none';
+        sendBtn.disabled = true;
+        return;
+      }
+
+      cartContainer.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.product}</div>
+            <div class="cart-item-option">${item.option} x${item.quantity}</div>
+          </div>
+          <div class="cart-item-price">R${item.total}</div>
+          <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
+        </div>
+      `).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.total, 0);
+      totalElement.textContent = `R${total}`;
+      totalContainer.style.display = 'block';
+      sendBtn.disabled = false;
+    }
+
+    function sendOrderToWhatsApp() {
+      if (cart.length === 0) return;
+
+      let orderText = '*Order Summary*\n\n';
+      let total = 0;
+
+      cart.forEach(item => {
+        orderText += `• ${item.product}\n`;
+        orderText += `  ${item.option}\n`;
+        orderText += `  Qty: ${item.quantity} x R${item.price} = R${item.total}\n\n`;
+        total += item.total;
+      });
+
+      orderText += `*Total: R${total}*\n\n`;
+      orderText += `Please confirm this order and let me know the details for delivery.`;
+
+      const encodedMessage = encodeURIComponent(orderText);
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+    }
+
+    // Event listener for send button
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('send-order-btn').addEventListener('click', sendOrderToWhatsApp);
+    });
+
+    // Display products on page load
+    renderProducts('slouchy', products.slouchy);
+    renderProducts('scrunchies', products.scrunchies);
   </script>
 </body>
 </html>

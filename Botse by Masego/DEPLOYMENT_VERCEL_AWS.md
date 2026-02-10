@@ -52,7 +52,7 @@ return 'https://your-aws-elasticbeanstalk-url.com'; // Replace with actual AWS U
 ### Step 2: Install EB CLI
 ```powershell
 # On Windows PowerShell
-  
+pip install awsebcli --upgrade --user
 ```
 
 ### Step 3: Configure AWS Credentials
