@@ -430,7 +430,10 @@
           <div class="cart-empty">Your cart is empty</div>
         </div>
         <div id="cart-total" class="cart-total" style="display: none;">
-          Total: <span id="total-price">R0</span>
+          <div style="margin-bottom: 0.5rem;">
+            Total: <span id="total-price">R0</span>
+          </div>
+          <div id="deposit-info"></div>
         </div>
         <button id="send-order-btn" class="send-order-btn" disabled>Send Order to WhatsApp</button>
       </div>
@@ -610,7 +613,22 @@
       `).join('');
 
       const total = cart.reduce((sum, item) => sum + item.total, 0);
+      const deposit = Math.round((total * 0.5) * 100) / 100;
+      const remaining = total - deposit;
+      
       totalElement.textContent = `R${total}`;
+      
+      // Update total container with deposit info
+      const depositInfo = document.getElementById('deposit-info');
+      if (depositInfo) {
+        depositInfo.innerHTML = `
+          <div style="font-size: 0.9rem; margin-top: 0.5rem; line-height: 1.6;">
+            <div style="color: #666;">50% Deposit Required: <strong style="color: #c7758a;">R${deposit}</strong></div>
+            <div style="color: #666;">Remaining Balance: <strong style="color: #333;">R${remaining}</strong></div>
+          </div>
+        `;
+      }
+      
       totalContainer.style.display = 'block';
       sendBtn.disabled = false;
     }
@@ -632,7 +650,13 @@
         total += item.total;
       });
 
-      orderText += `*Total: R${total}*\n\n`;
+      const deposit = Math.round((total * 0.5) * 100) / 100;
+      const remaining = total - deposit;
+
+      orderText += `*Order Total: R${total}*\n\n`;
+      orderText += `💰 *Payment Required:*\n`;
+      orderText += `50% Deposit: R${deposit}\n`;
+      orderText += `Remaining Balance: R${remaining}\n\n`;
       orderText += `Please confirm this order and let me know the details for delivery.`;
 
       const encodedMessage = encodeURIComponent(orderText);
