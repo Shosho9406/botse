@@ -636,6 +636,34 @@
     </div>
   </div>
 
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 450px; text-align: center;">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+      <h2 class="modal-title">Order Sent Successfully!</h2>
+      
+      <div style="background: #f0f9f0; border-left: 4px solid #25D366; padding: 1.2rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: left;">
+        <p style="color: #333; margin-bottom: 0.8rem;"><strong>What happens next:</strong></p>
+        <ol style="padding-left: 1.5rem; color: #666; font-size: 0.9rem; line-height: 1.6;">
+          <li>We've received your order on WhatsApp</li>
+          <li>We'll confirm details & availability</li>
+          <li>You'll arrange payment (50% deposit)</li>
+          <li>We'll craft & deliver your items</li>
+        </ol>
+      </div>
+
+      <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">
+        💬 <strong>Keep WhatsApp open</strong> — we'll reply shortly<br>
+        Usually within 1-2 hours (9am-6pm SAST)
+      </p>
+
+      <div class="modal-actions">
+        <button class="modal-confirm-btn" id="success-new-order" style="background: #c7758a;">Continue Shopping</button>
+        <button class="modal-cancel-btn" id="success-close">Done</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p>© 2026 Botse by Masego — Handmade with love</p>
   </footer>
@@ -878,15 +906,24 @@
       const encodedMessage = encodeURIComponent(orderText);
       const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
       
-      // Close modal
+      // Close confirmation modal
       document.getElementById('confirmation-modal').classList.remove('active');
       
-      // Open WhatsApp
-      window.open(whatsappURL, '_blank');
+      // Show success modal first before opening WhatsApp
+      document.getElementById('success-modal').classList.add('active');
+      
+      // Open WhatsApp after a short delay
+      setTimeout(() => {
+        window.open(whatsappURL, '_blank');
+      }, 500);
     }
 
     function closeModal() {
       document.getElementById('confirmation-modal').classList.remove('active');
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-modal').classList.remove('active');
     }
 
     // Event listener for send button
@@ -894,11 +931,23 @@
       document.getElementById('send-order-btn').addEventListener('click', sendOrderToWhatsApp);
       document.getElementById('modal-confirm').addEventListener('click', confirmAndSendToWhatsApp);
       document.getElementById('modal-cancel').addEventListener('click', closeModal);
+      document.getElementById('success-close').addEventListener('click', closeSuccessModal);
+      document.getElementById('success-new-order').addEventListener('click', () => {
+        closeSuccessModal();
+        cart = [];
+        updateCart();
+      });
       
       // Close modal if clicking outside the modal-box
       document.getElementById('confirmation-modal').addEventListener('click', (e) => {
         if (e.target.id === 'confirmation-modal') {
           closeModal();
+        }
+      });
+
+      document.getElementById('success-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'success-modal') {
+          closeSuccessModal();
         }
       });
     });

@@ -275,6 +275,68 @@
       font-size: 0.85rem;
       opacity: 0.9;
     }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .faq-question {
+      padding: 1.2rem;
+      background: linear-gradient(135deg, #c7758a 0%, #d9899e 100%);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: linear-gradient(135deg, #b85c7e 0%, #c7758a 100%);
+    }
+
+    .faq-toggle {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: #f9f9f9;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.2rem;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
     
     footer {
 
@@ -493,7 +555,93 @@
   <a class="btn" href="https://wa.me/27695895793" target="_blank">WhatsApp: 069 589 5793</a>
 </section>
 
-<footer>
+<!-- FAQ Section -->
+<section>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How do I place an order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>Simply browse our products on the <strong>Shop</strong> page, select your preferred colors and customizations, add items to your cart, and click "Send Order to WhatsApp". You'll be taken directly to WhatsApp where you can chat with us to confirm details and arrange payment.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What's the deposit requirement?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We require a <strong>50% deposit</strong> upfront to confirm your order and purchase materials. The remaining 50% is due before delivery. This ensures we have the commitment to craft your items and helps us manage materials efficiently.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How long does it take to receive my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Production time:</strong> 5-10 business days after deposit is received. <strong>Delivery:</strong> Johannesburg & surrounding areas can be arranged. For areas outside Johannesburg, courier fees apply. We'll confirm delivery options with you via WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I customize the colors?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Yes!</strong> All products are customizable. You can request specific colors, add patterns, stars, hearts, and other embellishments. Describe what you want in the customization field on the shop page or tell us via WhatsApp. There may be an additional charge for complex custom designs.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do you offer bulk orders or discounts?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Absolutely!</strong> We welcome bulk orders for weddings, events, corporate gifts, and resellers. We offer <strong>special pricing</strong> for orders of 10+ items. Contact us via WhatsApp to discuss your bulk order needs and get a custom quote.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We accept <strong>bank transfers</strong> and <strong>digital payments</strong> via Capitec, FNB, Absa, and other South African banks. We'll provide our bank details once you've sent your order via WhatsApp. Payment plans may be available for larger orders — just ask!</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What if I'm not happy with my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We're committed to quality and customer satisfaction. If there's an issue with your order, contact us immediately via WhatsApp with photos. We'll work with you to resolve the problem — whether that's redoing the item or offering a refund.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I request a size/fit guide?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Slouchy Beanies:</strong> One size fits most, designed to be loose. <strong>Scrunchies:</strong> Standard size works for most hair types. <strong>Open vs Closed:</strong> Open slouchies are more relaxed; Closed are snugger. Ask us via WhatsApp for specific dimensions!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
   <p>© 2026 Botse by Masego — Handmade with love</p>
   <p style="font-size:0.8rem;margin-top:0.5rem;"><a href="/admin.html" style="color:#fff;text-decoration:underline;">Admin</a></p>
 </footer>
@@ -508,6 +656,16 @@
     e.target.reset();
     alert('Thank you for subscribing! We\'ll send you a 10% discount code via WhatsApp.');
   }
+
+  // FAQ Toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  });
 </script>
 </body>
 </html>
