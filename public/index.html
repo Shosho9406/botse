@@ -130,6 +130,154 @@
       font-size: .9rem;
     }
 
+    /* Promo Banner */
+    .promo-banner {
+      background: linear-gradient(135deg, #c7758a, #9d1f47);
+      color: #fff;
+      padding: 0.8rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: #fff3f6;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .newsletter-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .newsletter-section p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .newsletter-form button {
+      padding: 0.8rem 1.5rem;
+      background: #c7758a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: #b85c7e;
+      transform: translateY(-2px);
+    }
+
+    .newsletter-discount {
+      background: #c7758a;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      background: #c7758a;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 45px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #b85c7e;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(199, 117, 138, 0.3);
+    }
+
+    /* Product showcase cards */
+    .product-showcase {
+      background: linear-gradient(135deg, #c7758a 0%, #d9899e 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .product-showcase h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-showcase-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .showcase-item {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .showcase-item strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .showcase-item span {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    
+    footer {
+
     /* order form */
     .order-form { max-width: 700px; margin: 1.5rem auto; background: #fff; padding: 1.2rem; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,.06);} 
     .order-form label { display:block; margin-bottom: .3rem; font-weight:600; }
@@ -166,6 +314,11 @@
   </style>
 </head>
 <body>
+
+<!-- Promo Banner -->
+<div class="promo-banner">
+  🎉 Get 50% OFF your first order! Use code: WELCOME50 (Limited time)
+</div>
 
 <header>
   <h1>BOTSE BY MASEGO</h1>
@@ -218,7 +371,7 @@
     <div class="card">
       <h3>✨ Scrunchies</h3>
       <ul>
-        <li>Standard (One colour) – <span class="price">R50</span></li>
+        <li>Standard (One colour) – <span class="price">R15</span></li>
         <li>Standard (Two colours) – <span class="price">R70</span></li>
         <li>Premium (Custom design) – <span class="price">R130</span></li>
       </ul>
@@ -251,6 +404,82 @@
 </section>
 
 <section>
+  <h2 class="section-title">Featured Collections</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div class="product-showcase">
+      <h4>🧢 Slouchy Beanies</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Cozy & stylish beanies in your favorite colors</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>One Colour</strong>
+          <span>R120</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Two Colours</strong>
+          <span>R150</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>R200</span>
+        </div>
+      </div>
+      <a href="/products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Beanies</a>
+    </div>
+
+    <div class="product-showcase">
+      <h4>✨ Scrunchies</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Colorful hair accessories for every style</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>Standard</strong>
+          <span>From R50</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Premium</strong>
+          <span>From R80</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>R130</span>
+        </div>
+      </div>
+      <a href="/products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Scrunchies</a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section style="background: linear-gradient(135deg, #f5e6e8 0%, #fff3f6 100%); border-radius: 0;">
+  <div class="newsletter-section">
+    <h3>✉️ Stay Updated</h3>
+    <p>Get first access to new designs, exclusive discounts, and special offers!</p>
+    
+    <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <div class="newsletter-discount">
+      <strong>Bonus: Get 10% OFF your order!</strong><br>
+      Subscribe now and receive an instant discount code.
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Follow Us</h2>
+  <div style="text-align: center;">
+    <p style="margin-bottom: 1.5rem; color: #666;">Connect with us on social media for inspiration and updates</p>
+    <div class="social-links">
+      <a href="https://facebook.com/botsebymasego" target="_blank" title="Facebook">f</a>
+      <a href="https://instagram.com/botsebymasego" target="_blank" title="Instagram">📷</a>
+      <a href="https://tiktok.com/@botsebymasego" target="_blank" title="TikTok">🎵</a>
+      <a href="https://pinterest.com/botsebymasego" target="_blank" title="Pinterest">📌</a>
+    </div>
+  </div>
+</section>
+
+<section>
   <h2 class="section-title">Ready to Order?</h2>
   <div style="text-align:center;">
     <p style="margin-bottom:1rem;">Start browsing our collection and place your order today.</p>
@@ -268,5 +497,17 @@
   <p>© 2026 Botse by Masego — Handmade with love</p>
   <p style="font-size:0.8rem;margin-top:0.5rem;"><a href="/admin.html" style="color:#fff;text-decoration:underline;">Admin</a></p>
 </footer>
+
+<script>
+  function handleNewsletterSignup(e) {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    const message = `Hi! I'd like to subscribe to your newsletter: ${email}`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/27695895793?text=${encodedMessage}`, '_blank');
+    e.target.reset();
+    alert('Thank you for subscribing! We\'ll send you a 10% discount code via WhatsApp.');
+  }
+</script>
 </body>
 </html>
