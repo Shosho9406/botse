@@ -250,9 +250,15 @@ app.get('/api/admin/analytics', adminAuth, async (req, res) => {
 
 // Start server only when run directly
 if (require.main === module) {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, '127.0.0.1', () => {
     log('INFO', `Server running in ${NODE_ENV} mode on http://localhost:${PORT}`);
     log('INFO', `Admin credentials: ${ADMIN_USER}/${ADMIN_PASS === 'password' ? '(default - CHANGE IN PRODUCTION)' : '***'}`);
+  });
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      log('ERROR', `Port ${PORT} is already in use. Please close the other process or specify a different PORT.`);
+      process.exit(1);
+    }
   });
 }
 
