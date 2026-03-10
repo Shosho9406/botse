@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Botse by Masego — Premium Handmade Crochet</title>
+  <title>Botse by Masego — Premium Handmade Crochet | Slouchy Beanies & Scrunchies</title>
+  <meta name="description" content="Handmade crochet essentials by Botse by Masego. Premium slouchy beanies and scrunchies with custom colors. Order via WhatsApp for unique, personalized crochet accessories." />
+  <meta name="keywords" content="crochet, handmade, slouchy beanie, scrunchie, custom crochet, South African handmade, crochet accessories, beanie hat, hair accessories" />
+  <meta name="author" content="Botse by Masego" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Botse by Masego — Premium Handmade Crochet" />
+  <meta property="og:description" content="Handmade crochet essentials with custom colors. Premium slouchy beanies and scrunchies." />
+  <meta property="og:image" content="/images/og-image.jpg" />
+  <meta property="og:url" content="https://botsebymasego.com" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Botse by Masego — Premium Handmade Crochet" />
+  <meta name="twitter:description" content="Handmade crochet essentials with custom colors. Premium slouchy beanies and scrunchies." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,6 +37,84 @@
       --text-dark: #1a1a1a;
       --text-light: #666;
       --bg-light: #fafafa;
+      --shadow: 0 4px 20px rgba(157, 31, 71, 0.1);
+      --shadow-hover: 0 8px 30px rgba(157, 31, 71, 0.2);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Global animations and utilities */
+    * {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .slide-up {
+      animation: slideUp 0.6s ease-out;
+    }
+
+    .bounce-in {
+      animation: bounceIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
     body {
@@ -347,6 +446,175 @@
       box-shadow: 0 8px 20px rgba(199, 117, 138, 0.3);
     }
 
+    /* Customer Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(199, 117, 138, 0.08);
+      border: 1px solid rgba(199, 117, 138, 0.1);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(199, 117, 138, 0.15);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+      font-size: 4rem;
+      color: rgba(199, 117, 138, 0.1);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .testimonial-stars {
+      color: #ffd700;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .testimonial-text {
+      color: var(--text-dark);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .testimonial-author strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .testimonial-author span {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(199, 117, 138, 0.3);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 6px 20px rgba(199, 117, 138, 0.4);
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(199, 117, 138, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: #fff;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(199, 117, 138, 0.1);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(199, 117, 138, 0.3);
+    }
+
+    .contact-submit-btn.loading {
+      pointer-events: none;
+    }
+
     /* Product showcase */
     .product-showcase {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -476,6 +744,11 @@
       .grid { gap: 1.5rem; }
       .newsletter-form { flex-direction: column; }
       .modal-box { padding: 1.5rem; }
+      .form-row { grid-template-columns: 1fr; gap: 1rem; }
+      .contact-form { padding: 2rem 1.5rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .search-container { flex-direction: column; align-items: stretch; }
+      .filter-select { margin-bottom: 0.5rem; }
     }
 
     @media (max-width: 480px) {
@@ -793,7 +1066,7 @@
 <div style="max-width:1100px;margin:1rem auto;padding:0 1rem;text-align:center;background: linear-gradient(135deg, #c7758a, #b85c7e);color:#fff;padding:3rem 1.5rem;border-radius:12px;">
   <h2 style="font-size:2rem;margin-bottom:1rem;">Handmade Crochet Products for Every Occasion</h2>
   <p style="font-size:1.1rem;margin-bottom:2rem;">Beautiful, colorful, and unique items crafted with attention to detail</p>
-  <a href="/products.html" style="display:inline-block;padding:1rem 2rem;background:#fff;color:#c7758a;text-decoration:none;border-radius:30px;font-weight:600;font-size:1rem;transition:all 0.3s ease;">Shop Now</a>
+  <a href="./products.html" style="display:inline-block;padding:1rem 2rem;background:#fff;color:#c7758a;text-decoration:none;border-radius:30px;font-weight:600;font-size:1rem;transition:all 0.3s ease;">Shop Now</a>
 </div>
 
 <section id="about">
@@ -844,7 +1117,7 @@
         <li>Three colours – <span class="price">R180</span></li>
         <li>Custom colour – <span class="price">R200</span></li>
       </ul>
-      <a href="/products.html" class="btn">View Details</a>
+      <a href="./products.html" class="btn">View Details</a>
     </div>
 
     <div class="card">
@@ -854,7 +1127,18 @@
         <li>Standard (Two colours) – <span class="price">R50</span></li>
         <li>Premium (Custom design) – <span class="price">R100</span></li>
       </ul>
-      <a href="/products.html" class="btn">View Details</a>
+      <a href="./products.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+      <h3>🎀 Ruffle Hats</h3>
+      <ul>
+        <li><strong>Small:</strong> From R200</li>
+        <li><strong>Medium:</strong> From R280</li>
+        <li><strong>Large:</strong> From R350</li>
+        <li><strong>XL:</strong> From R420</li>
+      </ul>
+      <a href="./products.html" class="btn">View Details</a>
     </div>
 
     <div class="card">
@@ -865,7 +1149,7 @@
         <li>Add stars, hearts & more</li>
         <li>Bulk orders welcome</li>
       </ul>
-      <a href="/products.html" class="btn">Custom Order</a>
+      <a href="./products.html" class="btn">Custom Order</a>
     </div>
   </div>
 </section>
@@ -902,7 +1186,7 @@
           <span>R200</span>
         </div>
       </div>
-      <a href="/products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Beanies</a>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Beanies</a>
     </div>
 
     <div class="product-showcase">
@@ -922,7 +1206,27 @@
           <span>R100</span>
         </div>
       </div>
-      <a href="/products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Scrunchies</a>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Scrunchies</a>
+    </div>
+
+    <div class="product-showcase">
+      <h4>🎀 Ruffle Hats</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Elegant ruffle designs in multiple sizes</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>Small</strong>
+          <span>From R200</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Large</strong>
+          <span>From R350</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>Up to R480</span>
+        </div>
+      </div>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Ruffles</a>
     </div>
   </div>
 </section>
@@ -940,7 +1244,57 @@
 
     <div class="newsletter-discount">
       <strong>Bonus: Get 10% OFF your order!</strong><br>
-      Subscribe now and receive an instant discount code.
+      Subscribe now and receive the discount code <strong>NEWSLETTER10</strong> instantly via WhatsApp.
+    </div>
+  </div>
+</section>
+
+<!-- Customer Testimonials -->
+<section style="background: linear-gradient(135deg, #fff5f7 0%, #fef7f9 100%); padding: 4rem 0;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">💬 What Our Customers Say</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Absolutely love my custom scrunchies! The colors are vibrant and the quality is outstanding. Masego really took the time to understand exactly what I wanted."</p>
+        <div class="testimonial-author">
+          <strong>Sarah K.</strong>
+          <span>Johannesburg</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"My slouchy beanie is perfect for winter! So warm and stylish. The customization options are amazing - I got exactly the colors I wanted."</p>
+        <div class="testimonial-author">
+          <strong>Michelle T.</strong>
+          <span>Cape Town</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Fast delivery and excellent communication via WhatsApp. The beanie I ordered for my daughter was exactly what she wanted. Will definitely order again!"</p>
+        <div class="testimonial-author">
+          <strong>Thandi M.</strong>
+          <span>Durban</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"The attention to detail is incredible. My custom scrunchie set arrived perfectly packaged and the colors are even more beautiful in person!"</p>
+        <div class="testimonial-author">
+          <strong>Linda R.</strong>
+          <span>Pretoria</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="color: #666; font-size: 1.1rem; margin-bottom: 1rem;">Join hundreds of happy customers! 🎉</p>
+      <a href="./products.html" class="btn" style="background: var(--primary); color: white; padding: 1rem 2rem; font-size: 1.1rem;">Start Your Order</a>
     </div>
   </div>
 </section>
@@ -951,7 +1305,7 @@
     <p style="margin-bottom: 1.5rem; color: #666;">Connect with us on social media for inspiration and updates</p>
     <div class="social-links">
       <a href="https://facebook.com/botsebymasego" target="_blank" title="Facebook">f</a>
-      <a href="https://instagram.com/botsebymasego" target="_blank" title="Instagram">📷</a>
+      <a href="https://instagram.com/botse_by_masego" target="_blank" title="Instagram">📷</a>
       <a href="https://tiktok.com/@botsebymasego" target="_blank" title="TikTok">🎵</a>
       <a href="https://pinterest.com/botsebymasego" target="_blank" title="Pinterest">📌</a>
     </div>
@@ -962,7 +1316,7 @@
   <h2 class="section-title">Ready to Order?</h2>
   <div style="text-align:center;">
     <p style="margin-bottom:1rem;">Start browsing our collection and place your order today.</p>
-    <a href="/products.html" class="btn">Start Shopping</a>
+    <a href="./products.html" class="btn">Start Shopping</a>
   </div>
 </section>
 
@@ -1055,6 +1409,92 @@
         <p><strong>Slouchy Beanies:</strong> One size fits most, designed to be loose. <strong>Scrunchies:</strong> Standard size works for most hair types. <strong>Open vs Closed:</strong> Open slouchies are more relaxed; Closed are snugger. Ask us via WhatsApp for specific dimensions!</p>
       </div>
     </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How do I care for my crochet items?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Gentle care:</strong> Hand wash in cold water with mild detergent. Air dry flat. Avoid direct sunlight and heat. Store in a cool, dry place. With proper care, your items will last for years! 💕</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do you ship internationally?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Yes!</strong> We ship worldwide via registered mail. International shipping costs vary by destination and package weight. Contact us via WhatsApp for a shipping quote. Delivery typically takes 7-14 business days.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I change or cancel my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Before production:</strong> Full refund of deposit. <strong>After production begins:</strong> Deposit is non-refundable but we can discuss alternatives. Please contact us immediately if you need to make changes. We want you to be happy with your order! 🤗</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 4rem 0;">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">📬 Get In Touch</h2>
+    <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1.1rem;">
+      Have questions about customization, bulk orders, or anything else? Send us a message!
+    </p>
+
+    <form class="contact-form" onsubmit="handleContactForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact-name">Name *</label>
+          <input type="text" id="contact-name" name="name" required placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" placeholder="your.email@example.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-phone">Phone/WhatsApp *</label>
+        <input type="tel" id="contact-phone" name="phone" required placeholder="0791234567">
+      </div>
+
+      <div class="form-group">
+        <label for="contact-subject">Subject</label>
+        <select id="contact-subject" name="subject">
+          <option value="general">General Inquiry</option>
+          <option value="customization">Customization Question</option>
+          <option value="bulk">Bulk Order</option>
+          <option value="shipping">Shipping Question</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-message">Message *</label>
+        <textarea id="contact-message" name="message" required placeholder="Tell us how we can help you..." rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="contact-submit-btn">
+        <span class="btn-text">Send Message</span>
+        <span class="btn-loading" style="display: none;">Sending...</span>
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #dee2e6;">
+      <p style="color: var(--text-light); margin-bottom: 1rem;">Prefer to chat directly?</p>
+      <a href="https://wa.me/27695895793" target="_blank" class="btn" style="background: var(--accent); color: white;">
+        💬 WhatsApp Us
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1063,15 +1503,67 @@
   <p style="font-size:0.8rem;margin-top:0.5rem;"><a href="/admin.html" style="color:#fff;text-decoration:underline;">Admin</a></p>
 </footer>
 
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" style="display: none;">
+  ↑
+</button>
+
 <script>
   function handleNewsletterSignup(e) {
     e.preventDefault();
     const email = e.target.querySelector('input[type="email"]').value;
-    const message = `Hi! I'd like to subscribe to your newsletter: ${email}`;
+    const message = `Hi! I'd like to subscribe to your newsletter: ${email}. Please send me the NEWSLETTER10 discount code for 10% off my next order!`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/27695895793?text=${encodedMessage}`, '_blank');
     e.target.reset();
-    alert('Thank you for subscribing! We\'ll send you a 10% discount code via WhatsApp.');
+    alert('Thank you for subscribing! We\'ll send you the NEWSLETTER10 discount code via WhatsApp for 10% off your next order.');
+  }
+
+  function handleContactForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.contact-submit-btn');
+    const btnText = btn.querySelector('.btn-text');
+    const btnLoading = btn.querySelector('.btn-loading');
+
+    // Show loading state
+    btn.classList.add('loading');
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    // Create WhatsApp message
+    const message = `*Contact Form Inquiry*
+
+👤 *Name:* ${data.name}
+📧 *Email:* ${data.email || 'Not provided'}
+📱 *Phone:* ${data.phone}
+📋 *Subject:* ${data.subject}
+💬 *Message:* ${data.message}
+
+---
+*Sent from website contact form*`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/27695895793?text=${encodedMessage}`;
+
+    // Simulate sending delay
+    setTimeout(() => {
+      // Reset loading state
+      btn.classList.remove('loading');
+      btnText.style.display = 'inline';
+      btnLoading.style.display = 'none';
+
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+
+      // Reset form
+      e.target.reset();
+
+      // Show success message
+      alert('Thank you for your message! We\'ll get back to you via WhatsApp as soon as possible.');
+    }, 1000);
   }
 
   // FAQ Toggle functionality
@@ -1080,6 +1572,49 @@
     faqItems.forEach(item => {
       item.querySelector('.faq-question').addEventListener('click', () => {
         item.classList.toggle('active');
+      });
+    });
+
+    // Add fade-in animation to sections on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Add bounce animation to testimonial cards
+    document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+      card.classList.add('bounce-in');
+    });
+
+    // Back to Top functionality
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
     });
   });

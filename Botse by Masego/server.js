@@ -45,20 +45,53 @@ const products = [
   { id: 'open-slouchy', name: 'Open Slouchy', prices: { one: 120, two: 150, three: 180, custom: 200 } },
   { id: 'normal-slouchy', name: 'Normal Slouchy', prices: { one: 180, two: 200, three: 230, custom: 280 } },
   { id: 'big-slouchy', name: 'Big Slouchy', prices: { one: 250, two: 270, three: 290, custom: 320 } },
-  { id: 'scrunchie-small', name: 'Scrunchie (Small)', prices: { base: 15, extraColour: 10 } },
-  { id: 'scrunchie-medium', name: 'Scrunchie (Medium)', prices: { base: 35, extraColour: 10 } },
-  { id: 'scrunchie-large', name: 'Scrunchie (Large)', prices: { base: 50, extraColour: 20 } }
+
+  // Ruffle hats added per customer request
+  { id: 'ruffle-small', name: 'Ruffle Hat (Small)', prices: { one: 200, two: 220, three: 240, custom: 260 } },
+  { id: 'ruffle-medium', name: 'Ruffle Hat (Medium)', prices: { one: 280, two: 300, three: 320, custom: 340 } },
+  { id: 'ruffle-large', name: 'Ruffle Hat (Large)', prices: { one: 350, two: 370, three: 390, custom: 410 } },
+  { id: 'ruffle-xl', name: 'Ruffle Hat (XL)', prices: { one: 420, two: 440, three: 460, custom: 480 } },
+
+  // Scrunchies
+  { id: 'standard-scrunchie', name: 'Standard Scrunchie', prices: { one: 20, two: 50, three: 90 } },
+  { id: 'premium-scrunchie', name: 'Premium Scrunchie', prices: { one: 80, two: 100, custom: 130 } }
 ];
+
+// Discount codes configuration
+const discountCodes = {
+  'NEWSLETTER10': { type: 'percentage', value: 10, description: '10% off for newsletter subscribers' },
+  'WELCOME15': { type: 'percentage', value: 15, description: '15% welcome discount' },
+  'WELCOME30': { type: 'percentage', value: 30, description: '30% welcome discount' },
+  'SAVE20': { type: 'percentage', value: 20, description: '20% special savings' }
+};
+
+// Validate discount code
+function validateDiscountCode(code) {
+  if (!code || !code.trim()) return null;
+  const upperCode = code.trim().toUpperCase();
+  return discountCodes[upperCode] || null;
+}
 
 app.get('/api/products', (req, res) => {
   res.json(products);
+});
+
+// Validate discount code
+app.post('/api/validate-discount', (req, res) => {
+  const { code } = req.body || {};
+  const discount = validateDiscountCode(code);
+  if (discount) {
+    res.json(discount);
+  } else {
+    res.status(400).json({ error: 'Invalid discount code' });
+  }
 });
 
 // Create order
 app.post('/api/orders', async (req, res) => {
   try {
     // Basic server-side validation & sanitization
-    let { productId, variant, quantity, name, phone, address, notes } = req.body || {};
+    let { productId, variant, quantity, name, phone, address, notes, discountCode } = req.body || {};
     productId = (productId || '').toString().trim();
     name = (name || '').toString().trim();
     phone = (phone || '').toString().replace(/\D/g, ''); // keep digits only
@@ -80,7 +113,18 @@ app.post('/api/orders', async (req, res) => {
     else if (product.prices.base) unitPrice = product.prices.base;
     else unitPrice = Object.values(product.prices)[0] || 0;
 
-    const total = Math.round((unitPrice * quantity) * 100) / 100;
+    const subtotal = Math.round((unitPrice * quantity) * 100) / 100;
+    let discountAmount = 0;
+    let total = subtotal;
+
+    // Apply discount if valid
+    if (discountCode) {
+      const discount = validateDiscountCode(discountCode);
+      if (discount && discount.type === 'percentage') {
+        discountAmount = Math.round((subtotal * discount.value / 100) * 100) / 100;
+        total = subtotal - discountAmount;
+      }
+    }
 
     const deposit = Math.round((total * 0.5) * 100) / 100;
 
@@ -90,6 +134,9 @@ app.post('/api/orders', async (req, res) => {
       variant: variant || '',
       quantity,
       unitPrice,
+      subtotal,
+      discountCode: discountCode || '',
+      discountAmount,
       total,
       name,
       phone,

@@ -3,101 +3,767 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Botse by Masego</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Botse by Masego — Premium Handmade Crochet | Slouchy Beanies & Scrunchies</title>
+  <meta name="description" content="Handmade crochet essentials by Botse by Masego. Premium slouchy beanies and scrunchies with custom colors. Order via WhatsApp for unique, personalized crochet accessories." />
+  <meta name="keywords" content="crochet, handmade, slouchy beanie, scrunchie, custom crochet, South African handmade, crochet accessories, beanie hat, hair accessories" />
+  <meta name="author" content="Botse by Masego" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Botse by Masego — Premium Handmade Crochet" />
+  <meta property="og:description" content="Handmade crochet essentials with custom colors. Premium slouchy beanies and scrunchies." />
+  <meta property="og:image" content="/images/og-image.jpg" />
+  <meta property="og:url" content="https://botsebymasego.com" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Botse by Masego — Premium Handmade Crochet" />
+  <meta name="twitter:description" content="Handmade crochet essentials with custom colors. Premium slouchy beanies and scrunchies." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --primary: #c7758a;
+      --primary-dark: #9d1f47;
+      --secondary: #d9899e;
+      --accent: #25D366;
+      --text-dark: #1a1a1a;
+      --text-light: #666;
+      --bg-light: #fafafa;
+      --shadow: 0 4px 20px rgba(157, 31, 71, 0.1);
+      --shadow-hover: 0 8px 30px rgba(157, 31, 71, 0.2);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Global animations and utilities */
+    * {
+      scroll-behavior: smooth;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .slide-up {
+      animation: slideUp 0.6s ease-out;
+    }
+
+    .bounce-in {
+      animation: bounceIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
     body {
       font-family: 'Poppins', sans-serif;
-      background: #d4a5b0;
-      color: #222;
+      background: #fff;
+      color: var(--text-dark);
       line-height: 1.6;
     }
+    
     header {
-      background: #c7758a;
-      padding: 2.5rem 1rem;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding: 3.5rem 1.5rem;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(157, 31, 71, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    header h1 { font-size: 2.5rem; font-weight: 700; }
-    header p { margin-top: .5rem; font-size: 1.1rem; }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      animation: float 10s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(20px, -20px) rotate(5deg); }
+    }
+    
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
     
     nav {
-      margin-top: 1.5rem;
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.2rem;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
     
     nav a {
       display: inline-block;
-      padding: 0.7rem 1.5rem;
-      background: rgba(255, 255, 255, 0.25);
+      padding: 0.8rem 1.8rem;
+      background: rgba(255, 255, 255, 0.2);
       color: #fff;
       text-decoration: none;
-      border-radius: 25px;
+      border-radius: 30px;
       font-weight: 600;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
     
     nav a:hover {
-      background: rgba(255, 255, 255, 0.4);
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.8);
-    }
-    
-    nav a:active {
-      transform: translateY(0);
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
     section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 3rem 1.2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      font-weight: 600;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
+    /* Feature Cards */
     .card {
       background: #fff;
-      border-radius: 18px;
-      padding: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid #f0f0f0;
     }
 
-    .card h3 { margin-bottom: .8rem; font-size: 1.2rem; }
-    .card ul { list-style: none; }
-    .card li { margin-bottom: .4rem; }
-
-    .price { font-weight: 600; }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(199, 117, 138, 0.15);
+      border-color: var(--secondary);
+    }
+    
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    
+    .card p {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
 
     .highlight {
-      background: #d9899e;
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #fff;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(199, 117, 138, 0.2);
+    }
+
+    .highlight h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    
+    .highlight p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1.1rem 2.5rem;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(157, 31, 71, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(157, 31, 71, 0.3);
+    }
+    
+    .btn:active {
+      transform: translateY(-1px);
+    }
+    
+    .highlight .btn {
+      background: #fff;
+      color: var(--primary);
+    }
+    
+    .highlight .btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    footer p { margin-bottom: 0.5rem; }
+    
+    footer a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: linear-gradient(135deg, #fff3f6 0%, #fce4ec 100%);
       border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 600px;
+      margin: 3rem auto;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,.06);
+    }
+
+    .newsletter-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .newsletter-section p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.2s ease;
+    }
+    
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(199, 117, 138, 0.1);
+    }
+
+    .newsletter-form button {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(199, 117, 138, 0.3);
+    }
+
+    .newsletter-discount {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.3rem;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(199, 117, 138, 0.2);
+    }
+
+    .social-links a:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 8px 20px rgba(199, 117, 138, 0.3);
+    }
+
+    /* Customer Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(199, 117, 138, 0.08);
+      border: 1px solid rgba(199, 117, 138, 0.1);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(199, 117, 138, 0.15);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+      font-size: 4rem;
+      color: rgba(199, 117, 138, 0.1);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .testimonial-stars {
+      color: #ffd700;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .testimonial-text {
+      color: var(--text-dark);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .testimonial-author strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .testimonial-author span {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(199, 117, 138, 0.3);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 6px 20px rgba(199, 117, 138, 0.4);
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(199, 117, 138, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: #fff;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(199, 117, 138, 0.1);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(199, 117, 138, 0.3);
+    }
+
+    .contact-submit-btn.loading {
+      pointer-events: none;
+    }
+
+    /* Product showcase */
+    .product-showcase {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 16px;
+      padding: 2.5rem;
+      color: #fff;
+      text-align: center;
+      margin: 1.5rem 0;
+      transition: all 0.3s ease;
+    }
+    
+    .product-showcase:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(157, 31, 71, 0.2);
+    }
+
+    .product-showcase h4 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .product-showcase-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .showcase-item {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1.2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .showcase-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .showcase-item strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .showcase-item span {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      border: 1px solid #f0f0f0;
+    }
+
+    .faq-question {
       padding: 1.5rem;
-      text-align: center;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
     }
 
-    .cta {
-      background: #c7758a;
-      padding: 3rem 1rem;
-      text-align: center;
+    .faq-question:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      padding-left: 2rem;
     }
 
-    .cta h2 { margin-bottom: 1rem; }
+    .faq-toggle {
+      font-size: 1.3rem;
+      transition: transform 0.3s ease;
+    }
 
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: var(--bg-light);
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.5rem;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1rem; }
+      .section-title { font-size: 1.8rem; }
+      nav { gap: 0.8rem; }
+      nav a { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+      section { padding: 2.5rem 1rem; }
+      .grid { gap: 1.5rem; }
+      .newsletter-form { flex-direction: column; }
+      .modal-box { padding: 1.5rem; }
+      .form-row { grid-template-columns: 1fr; gap: 1rem; }
+      .contact-form { padding: 2rem 1.5rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .search-container { flex-direction: column; align-items: stretch; }
+      .filter-select { margin-bottom: 0.5rem; }
+    }
+    }
+
+    @media (max-width: 480px) {
+      header { padding: 2rem 1rem; }
+      header h1 { font-size: 1.6rem; }
+      header p { font-size: 0.9rem; }
+      nav { gap: 0.5rem; margin-top: 1rem; }
+      nav a { padding: 0.5rem 1rem; font-size: 0.75rem; }
+      section { padding: 1.5rem 0.8rem; }
+      .section-title { font-size: 1.3rem; margin-bottom: 1.5rem; }
+      .btn { padding: 0.9rem 1.8rem; font-size: 0.85rem; }
+    }
+  </style>
+  <style>
     .btn {
       display: inline-block;
       margin-top: 1rem;
@@ -122,6 +788,222 @@
       transform: translateY(0);
     }
 
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: .9rem;
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      background: linear-gradient(135deg, #c7758a, #9d1f47);
+      color: #fff;
+      padding: 0.8rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: #fff3f6;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .newsletter-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .newsletter-section p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .newsletter-form button {
+      padding: 0.8rem 1.5rem;
+      background: #c7758a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: #b85c7e;
+      transform: translateY(-2px);
+    }
+
+    .newsletter-discount {
+      background: #c7758a;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      background: #c7758a;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 45px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #b85c7e;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(199, 117, 138, 0.3);
+    }
+
+    /* Product showcase cards */
+    .product-showcase {
+      background: linear-gradient(135deg, #c7758a 0%, #d9899e 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .product-showcase h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-showcase-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .showcase-item {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 1rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .showcase-item strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .showcase-item span {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .faq-question {
+      padding: 1.2rem;
+      background: linear-gradient(135deg, #c7758a 0%, #d9899e 100%);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: linear-gradient(135deg, #b85c7e 0%, #c7758a 100%);
+    }
+
+    .faq-toggle {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: #f9f9f9;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 1.2rem;
+      max-height: 500px;
+    }
+
+    .faq-answer p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    
     footer {
       background: #222;
       color: #fff;
@@ -167,89 +1049,267 @@
 </head>
 <body>
 
-<header>
-  <h1>BOTSE BY MASEGO</h1>
-  <p>Colorful crochet essentials for You</p>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/products.html">Products</a>
-    <a href="/order.html">Order</a>
-    <a href="/payment.html">Payment</a>
-  </nav>
-</header>
-<div style="max-width:1100px;margin:1rem auto;padding:0 1rem;text-align:center;">
-  <!-- Featured image showing Botse collection -->
-  <img src="/images/collection.jpg" alt="Botse collection - handmade beanies and scrunchies" style="max-width:100%;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.08);" />
+<!-- Promo Banner -->
+<div class="promo-banner">
+  🎉 Get 30% OFF your first order! Use code: WELCOME30 (Limited time)
 </div>
 
+<header>
+  <h1>BOTSE BY MASEGO</h1>
+  <p>Colorful Crochet Essentials Made with Love</p>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./products.html">Shop</a>
+    <a href="./about.html">About</a>
+    <a href="./contact.html">Contact</a>
+  </nav>
+</header>
+<div style="max-width:1100px;margin:1rem auto;padding:0 1rem;text-align:center;background: linear-gradient(135deg, #c7758a, #b85c7e);color:#fff;padding:3rem 1.5rem;border-radius:12px;">
+  <h2 style="font-size:2rem;margin-bottom:1rem;">Handmade Crochet Products for Every Occasion</h2>
+  <p style="font-size:1.1rem;margin-bottom:2rem;">Beautiful, colorful, and unique items crafted with attention to detail</p>
+  <a href="./products.html" style="display:inline-block;padding:1rem 2rem;background:#fff;color:#c7758a;text-decoration:none;border-radius:30px;font-weight:600;font-size:1rem;transition:all 0.3s ease;">Shop Now</a>
+</div>
+
+<section id="about">
+  <h2 class="section-title">About Botse by Masego</h2>
+  <p style="max-width:800px;margin:0 auto 2rem;line-height:1.6;">
+    Botse by Masego is a small handmade crochet studio based in South Africa. Our pieces
+    are created with care using high-quality yarn and unique colour combinations. We love
+    turning your ideas into beautiful accessories and home decor – from cozy slouchy beanies
+    to vibrant scrunchies. Whether you're shopping for yourself, a gift, or planning a bulk
+    order, we're here to craft something special just for you.
+  </p>
+</section>
+
 <section>
-  <h2 class="section-title">Slouchy Beanies</h2>
+  <h2 class="section-title">Why Choose Botse by Masego?</h2>
   <div class="grid">
     <div class="card">
-      <h3>Open Slouchy</h3>
+      <h3>🎨 Handmade Quality</h3>
+      <p>Each product is carefully crafted by hand with premium yarn and quality materials.</p>
+    </div>
+    <div class="card">
+      <h3>🌈 Vibrant Colors</h3>
+      <p>Stunning color combinations and customization options to match your style perfectly.</p>
+    </div>
+    <div class="card">
+      <h3>💫 Custom Designs</h3>
+      <p>Get personalized crochet items with your preferred colors, patterns, and embellishments.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Contact Us</h2>
+  <p style="max-width:800px;margin:0 auto 2rem;line-height:1.6;">
+    The easiest way to reach us is via WhatsApp at <a href="https://wa.me/27695895793" style="color:var(--accent);">+27 695 895 793</a>.
+    Send your order details or any questions anytime – we'll reply during business hours (9am‑6pm SAST).
+  </p>
+</section>
+
+<section>
+  <h2 class="section-title">Our Products</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>🧢 Slouchy Beanies</h3>
       <ul>
         <li>One colour – <span class="price">R120</span></li>
         <li>Two colours – <span class="price">R150</span></li>
         <li>Three colours – <span class="price">R180</span></li>
         <li>Custom colour – <span class="price">R200</span></li>
       </ul>
+      <a href="./products.html" class="btn">View Details</a>
     </div>
-    <div class="card">
-      <h3>Normal Slouchy</h3>
-      <ul>
-        <li>One colour – <span class="price">R180</span></li>
-        <li>Two colours – <span class="price">R200</span></li>
-        <li>Three colours – <span class="price">R230</span></li>
-        <li>Custom colours – <span class="price">R280</span></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Big Slouchy</h3>
-      <ul>
-        <li>One colour – <span class="price">R250</span></li>
-        <li>Two colours – <span class="price">R270</span></li>
-        <li>Three colours – <span class="price">R290</span></li>
-        <li>Custom colours – <span class="price">R320</span></li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="highlight" style="margin-top:2rem;">
-    <p><strong>Customisation:</strong> Add stars, hearts & more from <strong>R20+</strong></p>
+    <div class="card">
+      <h3>✨ Scrunchies</h3>
+      <ul>
+        <li>Standard (One colour) – <span class="price">R20</span></li>
+        <li>Standard (Two colours) – <span class="price">R50</span></li>
+        <li>Premium (Custom design) – <span class="price">R100</span></li>
+      </ul>
+      <a href="./products.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+      <h3>🎀 Ruffle Hats</h3>
+      <ul>
+        <li><strong>Small:</strong> From R200</li>
+        <li><strong>Medium:</strong> From R280</li>
+        <li><strong>Large:</strong> From R350</li>
+        <li><strong>XL:</strong> From R420</li>
+      </ul>
+      <a href="./products.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+      <h3>🎨 Customization</h3>
+      <ul>
+        <li>Custom colours available</li>
+        <li>Add patterns & designs</li>
+        <li>Add stars, hearts & more</li>
+        <li>Bulk orders welcome</li>
+      </ul>
+      <a href="./products.html" class="btn">Custom Order</a>
+    </div>
   </div>
 </section>
 
 <section>
-  <h2 class="section-title">Scrunchies</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Small Size</h3>
-      <p>Only <span class="price">R15</span> for a trendy accessory.</p>
-    </div>
-    <div class="card">
-      <h3>Medium Size</h3>
-      <p>Grab yours for <span class="price">R35</span> and elevate your style.</p>
-    </div>
-    <div class="card">
-      <h3>Large Size</h3>
-      <p>Get yours for only <span class="price">R50</span>.</p>
-    </div>
-  </div>
-
-  <div class="highlight" style="margin-top:2rem;">
-    <p>Extra colours: <strong>+R10</strong> (Small & Medium) | <strong>+R20</strong> (Large)</p>
-  </div>
-</section>
-
-<section>
-  <h2 class="section-title">Policy</h2>
+  <h2 class="section-title">How to Order</h2>
   <div style="max-width:800px;margin:0 auto;background:#fff;padding:2rem;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.06);">
     <ol style="padding-left:1.5rem;line-height:1.8;font-size:1.05rem;">
-      <li><strong>Place Your Order</strong> — Browse our products and submit your order with your preferred colours and specifications.</li>
-      <li><strong>Pay 50% Deposit</strong> — Send a non-refundable 50% deposit to the account number provided on the payment page to secure your order.</li>
-      <li><strong>Rush Orders</strong> — Orders due in short notice will incur an additional fee. Plan ahead for the best prices.</li>
-      <li><strong>Delivery Not Included</strong> — Quoted prices do not include delivery. Shipping costs will be calculated based on your location.</li>
+      <li><strong>Browse & Select</strong> — Choose your products and customize them with your preferred colors and designs.</li>
+      <li><strong>Add to Cart</strong> — Add items to your shopping cart and review your order.</li>
+      <li><strong>Send via WhatsApp</strong> — Click "Send Order to WhatsApp" and complete your order directly with us.</li>
+      <li><strong>Confirm & Deliver</strong> — We'll confirm your order, arrange payment, and schedule delivery.</li>
     </ol>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Featured Collections</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div class="product-showcase">
+      <h4>🧢 Slouchy Beanies</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Cozy & stylish beanies in your favorite colors</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>One Colour</strong>
+          <span>R120</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Two Colours</strong>
+          <span>R150</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>R200</span>
+        </div>
+      </div>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Beanies</a>
+    </div>
+
+    <div class="product-showcase">
+      <h4>✨ Scrunchies</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Colorful hair accessories for every style</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>Standard</strong>
+          <span>From R20</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Premium</strong>
+          <span>From R50</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>R100</span>
+        </div>
+      </div>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Scrunchies</a>
+    </div>
+
+    <div class="product-showcase">
+      <h4>🎀 Ruffle Hats</h4>
+      <p style="font-size: 0.95rem; margin: 0.5rem 0;">Elegant ruffle designs in multiple sizes</p>
+      <div class="product-showcase-items">
+        <div class="showcase-item">
+          <strong>Small</strong>
+          <span>From R200</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Large</strong>
+          <span>From R350</span>
+        </div>
+        <div class="showcase-item">
+          <strong>Custom</strong>
+          <span>Up to R480</span>
+        </div>
+      </div>
+      <a href="./products.html" class="btn" style="margin-top: 1rem; background: #fff; color: #c7758a;">Shop Ruffles</a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Signup -->
+<section style="background: linear-gradient(135deg, #f5e6e8 0%, #fff3f6 100%); border-radius: 0;">
+  <div class="newsletter-section">
+    <h3>✉️ Stay Updated</h3>
+    <p>Get first access to new designs, exclusive discounts, and special offers!</p>
+    
+    <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <div class="newsletter-discount">
+      <strong>Bonus: Get 10% OFF your order!</strong><br>
+      Subscribe now and receive the discount code <strong>NEWSLETTER10</strong> instantly via WhatsApp.
+    </div>
+  </div>
+</section>
+
+<!-- Customer Testimonials -->
+<section style="background: linear-gradient(135deg, #fff5f7 0%, #fef7f9 100%); padding: 4rem 0;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">💬 What Our Customers Say</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Absolutely love my custom scrunchies! The colors are vibrant and the quality is outstanding. Masego really took the time to understand exactly what I wanted."</p>
+        <div class="testimonial-author">
+          <strong>Sarah K.</strong>
+          <span>Johannesburg</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"My slouchy beanie is perfect for winter! So warm and stylish. The customization options are amazing - I got exactly the colors I wanted."</p>
+        <div class="testimonial-author">
+          <strong>Michelle T.</strong>
+          <span>Cape Town</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Fast delivery and excellent communication via WhatsApp. The beanie I ordered for my daughter was exactly what she wanted. Will definitely order again!"</p>
+        <div class="testimonial-author">
+          <strong>Thandi M.</strong>
+          <span>Durban</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"The attention to detail is incredible. My custom scrunchie set arrived perfectly packaged and the colors are even more beautiful in person!"</p>
+        <div class="testimonial-author">
+          <strong>Linda R.</strong>
+          <span>Pretoria</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="color: #666; font-size: 1.1rem; margin-bottom: 1rem;">Join hundreds of happy customers! 🎉</p>
+      <a href="./products.html" class="btn" style="background: var(--primary); color: white; padding: 1rem 2rem; font-size: 1.1rem;">Start Your Order</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Follow Us</h2>
+  <div style="text-align: center;">
+    <p style="margin-bottom: 1.5rem; color: #666;">Connect with us on social media for inspiration and updates</p>
+    <div class="social-links">
+      <a href="https://facebook.com/botsebymasego" target="_blank" title="Facebook">f</a>
+      <a href="https://instagram.com/botsebymasego" target="_blank" title="Instagram">📷</a>
+      <a href="https://tiktok.com/@botsebymasego" target="_blank" title="TikTok">🎵</a>
+      <a href="https://pinterest.com/botsebymasego" target="_blank" title="Pinterest">📌</a>
+    </div>
   </div>
 </section>
 
@@ -257,7 +1317,7 @@
   <h2 class="section-title">Ready to Order?</h2>
   <div style="text-align:center;">
     <p style="margin-bottom:1rem;">Start browsing our collection and place your order today.</p>
-    <a href="/order.html" class="btn">Place Your Order</a>
+    <a href="./products.html" class="btn">Start Shopping</a>
   </div>
 </section>
 
@@ -267,12 +1327,298 @@
   <a class="btn" href="https://wa.me/27695895793" target="_blank">WhatsApp: 069 589 5793</a>
 </section>
 
-<footer>
+<!-- FAQ Section -->
+<section>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How do I place an order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>Simply browse our products on the <strong>Shop</strong> page, select your preferred colors and customizations, add items to your cart, and click "Send Order to WhatsApp". You'll be taken directly to WhatsApp where you can chat with us to confirm details and arrange payment.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What's the deposit requirement?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We require a <strong>50% deposit</strong> upfront to confirm your order and purchase materials. The remaining 50% is due before delivery. This ensures we have the commitment to craft your items and helps us manage materials efficiently.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How long does it take to receive my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Production time:</strong> 5-10 business days after deposit is received. <strong>Delivery:</strong> Johannesburg & surrounding areas can be arranged. For areas outside Johannesburg, courier fees apply. We'll confirm delivery options with you via WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I customize the colors?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Yes!</strong> All products are customizable. You can request specific colors, add patterns, stars, hearts, and other embellishments. Describe what you want in the customization field on the shop page or tell us via WhatsApp. There may be an additional charge for complex custom designs.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do you offer bulk orders or discounts?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Absolutely!</strong> We welcome bulk orders for weddings, events, corporate gifts, and resellers. We offer <strong>special pricing</strong> for orders of 10+ items. Contact us via WhatsApp to discuss your bulk order needs and get a custom quote.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We accept <strong>bank transfers</strong> and <strong>digital payments</strong> via Capitec, FNB, Absa, and other South African banks. We'll provide our bank details once you've sent your order via WhatsApp. Payment plans may be available for larger orders — just ask!</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What if I'm not happy with my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p>We're committed to quality and customer satisfaction. If there's an issue with your order, contact us immediately via WhatsApp with photos. We'll work with you to resolve the problem — whether that's redoing the item, offering another product, discount on the next order.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I request a size/fit guide?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Slouchy Beanies:</strong> One size fits most, designed to be loose. <strong>Scrunchies:</strong> Standard size works for most hair types. <strong>Open vs Closed:</strong> Open slouchies are more relaxed; Closed are snugger. Ask us via WhatsApp for specific dimensions!</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How do I care for my crochet items?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Gentle care:</strong> Hand wash in cold water with mild detergent. Air dry flat. Avoid direct sunlight and heat. Store in a cool, dry place. With proper care, your items will last for years! 💕</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Do you ship internationally?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Yes!</strong> We ship worldwide via registered mail. International shipping costs vary by destination and package weight. Contact us via WhatsApp for a shipping quote. Delivery typically takes 7-14 business days.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>Can I change or cancel my order?</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">
+        <p><strong>Before production:</strong> Full refund of deposit. <strong>After production begins:</strong> Deposit is non-refundable but we can discuss alternatives. Please contact us immediately if you need to make changes. We want you to be happy with your order! 🤗</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 4rem 0;">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+    <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">📬 Get In Touch</h2>
+    <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1.1rem;">
+      Have questions about customization, bulk orders, or anything else? Send us a message!
+    </p>
+
+    <form class="contact-form" onsubmit="handleContactForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contact-name">Name *</label>
+          <input type="text" id="contact-name" name="name" required placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" placeholder="your.email@example.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-phone">Phone/WhatsApp *</label>
+        <input type="tel" id="contact-phone" name="phone" required placeholder="0791234567">
+      </div>
+
+      <div class="form-group">
+        <label for="contact-subject">Subject</label>
+        <select id="contact-subject" name="subject">
+          <option value="general">General Inquiry</option>
+          <option value="customization">Customization Question</option>
+          <option value="bulk">Bulk Order</option>
+          <option value="shipping">Shipping Question</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="contact-message">Message *</label>
+        <textarea id="contact-message" name="message" required placeholder="Tell us how we can help you..." rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="contact-submit-btn">
+        <span class="btn-text">Send Message</span>
+        <span class="btn-loading" style="display: none;">Sending...</span>
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #dee2e6;">
+      <p style="color: var(--text-light); margin-bottom: 1rem;">Prefer to chat directly?</p>
+      <a href="https://wa.me/27695895793" target="_blank" class="btn" style="background: var(--accent); color: white;">
+        💬 WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
   <p>© 2026 Botse by Masego — Handmade with love</p>
   <p style="font-size:0.8rem;margin-top:0.5rem;"><a href="/admin.html" style="color:#fff;text-decoration:underline;">Admin</a></p>
 </footer>
 
-<script src="/api-config.js"></script>
-<script src="/app.js"></script>
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" style="display: none;">
+  ↑
+</button>
+
+<script>
+  function handleNewsletterSignup(e) {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    const message = `Hi! I'd like to subscribe to your newsletter: ${email}. Please send me the NEWSLETTER10 discount code for 10% off my next order!`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/27695895793?text=${encodedMessage}`, '_blank');
+    e.target.reset();
+    alert('Thank you for subscribing! We\'ll send you the NEWSLETTER10 discount code via WhatsApp for 10% off your next order.');
+  }
+
+  function handleContactForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.contact-submit-btn');
+    const btnText = btn.querySelector('.btn-text');
+    const btnLoading = btn.querySelector('.btn-loading');
+
+    // Show loading state
+    btn.classList.add('loading');
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    // Create WhatsApp message
+    const message = `*Contact Form Inquiry*
+
+👤 *Name:* ${data.name}
+📧 *Email:* ${data.email || 'Not provided'}
+📱 *Phone:* ${data.phone}
+📋 *Subject:* ${data.subject}
+💬 *Message:* ${data.message}
+
+---
+*Sent from website contact form*`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/27695895793?text=${encodedMessage}`;
+
+    // Simulate sending delay
+    setTimeout(() => {
+      // Reset loading state
+      btn.classList.remove('loading');
+      btnText.style.display = 'inline';
+      btnLoading.style.display = 'none';
+
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+
+      // Reset form
+      e.target.reset();
+
+      // Show success message
+      alert('Thank you for your message! We\'ll get back to you via WhatsApp as soon as possible.');
+    }, 1000);
+  }
+
+  // FAQ Toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+    // Add fade-in animation to sections on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Add bounce animation to testimonial cards
+    document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+      card.classList.add('bounce-in');
+    });
+
+    // Back to Top functionality
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 </body>
 </html>

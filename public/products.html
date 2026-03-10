@@ -192,7 +192,70 @@
       color: var(--primary);
       font-size: 1.05rem;
     }
-    
+
+    /* Search and Filter Styles */
+    .search-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-container {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      background: #fff;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(199, 117, 138, 0.1);
+    }
+
+    .filter-select {
+      padding: 0.8rem 1.2rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      background: #fff;
+      cursor: pointer;
+      transition: var(--transition);
+      min-width: 140px;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(199, 117, 138, 0.1);
+    }
+
+    .search-results {
+      text-align: center;
+      margin-top: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
     /* Product Selection */
     .product-select {
       margin-bottom: 1.2rem;
@@ -666,10 +729,35 @@
   </header>
 
   <div class="container">
+    <!-- Search and Filter Section -->
+    <div class="search-section">
+      <div class="search-container">
+        <input type="text" id="product-search" placeholder="🔍 Search products..." class="search-input">
+        <select id="category-filter" class="filter-select">
+          <option value="all">All Categories</option>
+          <option value="slouchy">Slouchy Beanies</option>
+          <option value="ruffles">Ruffle Hats</option>
+          <option value="scrunchies">Scrunchies</option>
+        </select>
+        <select id="price-filter" class="filter-select">
+          <option value="all">All Prices</option>
+          <option value="under-100">Under R100</option>
+          <option value="100-200">R100 - R200</option>
+          <option value="over-200">Over R200</option>
+        </select>
+      </div>
+      <div class="search-results">
+        <span id="results-count">Showing all products</span>
+      </div>
+    </div>
+
     <div class="main-content">
       <div>
         <h2 class="section-title">👜 Slouchy Beanies</h2>
         <div id="slouchy" class="grid"></div>
+
+        <h2 class="section-title">🎀 Ruffle Hats</h2>
+        <div id="ruffles" class="grid"></div>
 
         <h2 class="section-title">✨ Scrunchies</h2>
         <div id="scrunchies" class="grid"></div>
@@ -682,6 +770,9 @@
 
       <div class="cart-container">
         <h3>🛒 Your Order</h3>
+        <div style="font-size: 0.8rem; color: #666; margin-bottom: 1rem; text-align: center;">
+          💾 Cart is saved automatically
+        </div>
         <div id="cart-items" class="cart-items">
           <div class="cart-empty">Cart is empty</div>
         </div>
@@ -690,6 +781,12 @@
             Total: <span id="total-price" style="font-size: 1.2rem;">R0</span>
           </div>
           <div id="deposit-info"></div>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+            <label for="discount-code" style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Discount Code (Optional)</label>
+            <input type="text" id="discount-code" placeholder="Enter code..." style="width: 100%; padding: 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.9rem;" oninput="this.value = this.value.toUpperCase()">
+            <button id="apply-discount" style="margin-top: 0.5rem; padding: 0.4rem 0.8rem; background: #25D366; color: white; border: none; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">Apply</button>
+            <div id="discount-message" style="font-size: 0.8rem; margin-top: 0.3rem; color: #666;"></div>
+          </div>
         </div>
         <button id="send-order-btn" class="send-order-btn" disabled>Send Order to WhatsApp</button>
       </div>
@@ -785,6 +882,44 @@
           ]
         }
       ],
+      ruffles: [
+        {
+          name: 'Ruffle Hat (Small)',
+          options: [
+            { label: '1 colour', price: 200 },
+            { label: '2 colours', price: 220 },
+            { label: '3 colours', price: 240 },
+            { label: 'Custom colours', price: 260 }
+          ]
+        },
+        {
+          name: 'Ruffle Hat (Medium)',
+          options: [
+            { label: '1 colour', price: 280 },
+            { label: '2 colours', price: 300 },
+            { label: '3 colours', price: 320 },
+            { label: 'Custom colours', price: 340 }
+          ]
+        },
+        {
+          name: 'Ruffle Hat (Large)',
+          options: [
+            { label: '1 colour', price: 350 },
+            { label: '2 colours', price: 370 },
+            { label: '3 colours', price: 390 },
+            { label: 'Custom colours', price: 410 }
+          ]
+        },
+        {
+          name: 'Ruffle Hat (XL)',
+          options: [
+            { label: '1 colour', price: 420 },
+            { label: '2 colours', price: 440 },
+            { label: '3 colours', price: 460 },
+            { label: 'Custom colours', price: 480 }
+          ]
+        }
+      ],
       scrunchies: [
         {
           name: 'Standard Scrunchie',
@@ -807,6 +942,47 @@
 
     let cart = [];
     let cartId = 0;
+    let appliedDiscount = null;
+
+    // Cookie functions for cart persistence
+    function setCookie(name, value, days = 7) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expires.toUTCString() + ';path=/';
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+      }
+      return null;
+    }
+
+    function saveCartToCookie() {
+      setCookie('botse_cart', JSON.stringify(cart), 7); // Save for 7 days
+      setCookie('botse_cartId', cartId.toString(), 7);
+    }
+
+    function loadCartFromCookie() {
+      const savedCart = getCookie('botse_cart');
+      const savedCartId = getCookie('botse_cartId');
+      
+      if (savedCart) {
+        try {
+          cart = JSON.parse(savedCart);
+          cartId = savedCartId ? parseInt(savedCartId) : 0;
+          updateCart();
+        } catch (e) {
+          console.error('Error loading cart from cookie:', e);
+          cart = [];
+          cartId = 0;
+        }
+      }
+    }
 
     function renderProducts(containerId, productList) {
       const container = document.getElementById(containerId);
@@ -822,7 +998,7 @@
         
         const typesHTML = p.types ? p.types.map(t => `<option value="${t}">${t}</option>`).join('') : '';
         
-        const emoji = containerId === 'slouchy' ? '👜' : '✨';
+        const emoji = containerId === 'slouchy' ? '👜' : (containerId === 'ruffles' ? '🎀' : '✨');
         
         card.innerHTML = `
           <div class="card-header">${emoji}</div>
@@ -908,11 +1084,13 @@
       };
       
       cart.push(item);
+      saveCartToCookie();
       updateCart();
     }
 
     function removeFromCart(id) {
       cart = cart.filter(item => item.id !== id);
+      saveCartToCookie();
       updateCart();
     }
 
@@ -942,10 +1120,23 @@
       `).join('');
 
       const total = cart.reduce((sum, item) => sum + item.total, 0);
-      const deposit = Math.round((total * 0.5) * 100) / 100;
-      const remaining = total - deposit;
+      let discountedTotal = total;
+      let discountAmount = 0;
       
-      totalElement.textContent = `R${total}`;
+      if (appliedDiscount) {
+        if (appliedDiscount.type === 'percentage') {
+          discountAmount = Math.round((total * appliedDiscount.value / 100) * 100) / 100;
+          discountedTotal = total - discountAmount;
+        }
+      }
+      
+      const deposit = Math.round((discountedTotal * 0.5) * 100) / 100;
+      const remaining = discountedTotal - deposit;
+      
+      totalElement.textContent = `R${discountedTotal}`;
+      if (discountAmount > 0) {
+        totalElement.innerHTML = `R${discountedTotal} <span style="font-size: 0.8rem; color: #25D366;">(Saved R${discountAmount})</span>`;
+      }
       
       // Update total container with deposit info
       const depositInfo = document.getElementById('deposit-info');
@@ -977,10 +1168,23 @@
       `).join('');
 
       const total = cart.reduce((sum, item) => sum + item.total, 0);
-      const deposit = Math.round((total * 0.5) * 100) / 100;
-      const remaining = total - deposit;
+      let discountedTotal = total;
+      let discountAmount = 0;
+      
+      if (appliedDiscount) {
+        if (appliedDiscount.type === 'percentage') {
+          discountAmount = Math.round((total * appliedDiscount.value / 100) * 100) / 100;
+          discountedTotal = total - discountAmount;
+        }
+      }
+      
+      const deposit = Math.round((discountedTotal * 0.5) * 100) / 100;
+      const remaining = discountedTotal - deposit;
 
-      document.getElementById('modal-total').textContent = `R${total}`;
+      document.getElementById('modal-total').textContent = `R${discountedTotal}`;
+      if (discountAmount > 0) {
+        document.getElementById('modal-total').innerHTML = `R${discountedTotal} <span style="font-size: 0.8rem; color: #25D366;">(Saved R${discountAmount})</span>`;
+      }
       document.getElementById('modal-deposit').textContent = `R${deposit}`;
       document.getElementById('modal-remaining').textContent = `R${remaining}`;
 
@@ -993,6 +1197,8 @@
 
       let orderText = '*Order Summary*\n\n';
       let total = 0;
+      let discountedTotal = 0;
+      let discountAmount = 0;
 
       cart.forEach(item => {
         orderText += `• ${item.product}${item.type ? ` (${item.type})` : ''}\n`;
@@ -1005,10 +1211,22 @@
         total += item.total;
       });
 
-      const deposit = Math.round((total * 0.5) * 100) / 100;
-      const remaining = total - deposit;
+      if (appliedDiscount) {
+        if (appliedDiscount.type === 'percentage') {
+          discountAmount = Math.round((total * appliedDiscount.value / 100) * 100) / 100;
+          discountedTotal = total - discountAmount;
+          orderText += `*Subtotal: R${total}*\n`;
+          orderText += `*Discount (${appliedDiscount.code}): -R${discountAmount}*\n`;
+          orderText += `*Order Total: R${discountedTotal}*\n\n`;
+        }
+      } else {
+        discountedTotal = total;
+        orderText += `*Order Total: R${total}*\n\n`;
+      }
 
-      orderText += `*Order Total: R${total}*\n\n`;
+      const deposit = Math.round((discountedTotal * 0.5) * 100) / 100;
+      const remaining = discountedTotal - deposit;
+
       orderText += `💰 *Payment Required:*\n`;
       orderText += `50% Deposit: R${deposit}\n`;
       orderText += `Remaining Balance: R${remaining}\n\n`;
@@ -1019,6 +1237,13 @@
       
       // Close confirmation modal
       document.getElementById('confirmation-modal').classList.remove('active');
+      
+      // Clear cart and cookies after sending order
+      cart = [];
+      cartId = 0;
+      setCookie('botse_cart', '', -1); // Delete cookie
+      setCookie('botse_cartId', '', -1); // Delete cookie
+      updateCart();
       
       // Show success modal first before opening WhatsApp
       document.getElementById('success-modal').classList.add('active');
@@ -1039,14 +1264,55 @@
 
     // Event listener for send button
     document.addEventListener('DOMContentLoaded', () => {
+      // Load cart from cookies on page load
+      loadCartFromCookie();
+      
       document.getElementById('send-order-btn').addEventListener('click', sendOrderToWhatsApp);
       document.getElementById('modal-confirm').addEventListener('click', confirmAndSendToWhatsApp);
       document.getElementById('modal-cancel').addEventListener('click', closeModal);
       document.getElementById('success-close').addEventListener('click', closeSuccessModal);
       document.getElementById('success-new-order').addEventListener('click', () => {
         closeSuccessModal();
-        cart = [];
-        updateCart();
+        // Don't clear cart - let customer continue shopping
+        // cart = [];
+        // updateCart();
+      });
+      
+      // Discount code handler
+      document.getElementById('apply-discount').addEventListener('click', async () => {
+        const code = document.getElementById('discount-code').value.trim().toUpperCase();
+        const messageEl = document.getElementById('discount-message');
+        
+        if (!code) {
+          messageEl.textContent = 'Please enter a discount code';
+          messageEl.style.color = '#dc3545';
+          return;
+        }
+        
+        try {
+          const response = await fetch('/api/validate-discount', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code })
+          });
+          
+          if (response.ok) {
+            const discount = await response.json();
+            appliedDiscount = discount;
+            messageEl.textContent = `✅ ${discount.description}`;
+            messageEl.style.color = '#25D366';
+            updateCart();
+          } else {
+            appliedDiscount = null;
+            messageEl.textContent = 'Invalid discount code';
+            messageEl.style.color = '#dc3545';
+            updateCart();
+          }
+        } catch (err) {
+          console.error('Discount validation error:', err);
+          messageEl.textContent = 'Error validating code';
+          messageEl.style.color = '#dc3545';
+        }
       });
       
       // Close modal if clicking outside the modal-box
@@ -1063,8 +1329,96 @@
       });
     });
 
+    // Search and Filter Functionality
+    let allProducts = {
+      slouchy: [...products.slouchy],
+      ruffles: [...products.ruffles],
+      scrunchies: [...products.scrunchies]
+    };
+
+    function filterProducts() {
+      const searchTerm = document.getElementById('product-search').value.toLowerCase();
+      const categoryFilter = document.getElementById('category-filter').value;
+      const priceFilter = document.getElementById('price-filter').value;
+
+      let filteredSlouchy = [...allProducts.slouchy];
+      let filteredRuffles = [...allProducts.ruffles];
+      let filteredScrunchies = [...allProducts.scrunchies];
+
+      // Apply search term
+      if (searchTerm) {
+        filteredSlouchy = filteredSlouchy.filter(p =>
+          p.name.toLowerCase().includes(searchTerm) ||
+          p.options.some(opt => opt.label.toLowerCase().includes(searchTerm))
+        );
+        filteredRuffles = filteredRuffles.filter(p =>
+          p.name.toLowerCase().includes(searchTerm) ||
+          p.options.some(opt => opt.label.toLowerCase().includes(searchTerm))
+        );
+        filteredScrunchies = filteredScrunchies.filter(p =>
+          p.name.toLowerCase().includes(searchTerm) ||
+          p.options.some(opt => opt.label.toLowerCase().includes(searchTerm))
+        );
+      }
+
+      // Apply category filter
+      if (categoryFilter !== 'all') {
+        if (categoryFilter === 'slouchy') {
+          filteredScrunchies = [];
+          filteredRuffles = [];
+        } else if (categoryFilter === 'ruffles') {
+          filteredSlouchy = [];
+          filteredScrunchies = [];
+        } else if (categoryFilter === 'scrunchies') {
+          filteredSlouchy = [];
+          filteredRuffles = [];
+        }
+      }
+
+      // Apply price filter
+      if (priceFilter !== 'all') {
+        const filterProductsByPrice = (productList) => {
+          return productList.filter(p => {
+            return p.options.some(opt => {
+              if (priceFilter === 'under-100') return opt.price < 100;
+              if (priceFilter === '100-200') return opt.price >= 100 && opt.price <= 200;
+              if (priceFilter === 'over-200') return opt.price > 200;
+              return true;
+            });
+          });
+        };
+        filteredSlouchy = filterProductsByPrice(filteredSlouchy);
+        filteredRuffles = filterProductsByPrice(filteredRuffles);
+        filteredScrunchies = filterProductsByPrice(filteredScrunchies);
+      }
+
+      // Update results count
+      const totalResults = filteredSlouchy.length + filteredRuffles.length + filteredScrunchies.length;
+      const resultsCount = document.getElementById('results-count');
+      if (searchTerm || categoryFilter !== 'all' || priceFilter !== 'all') {
+        resultsCount.textContent = `Found ${totalResults} product${totalResults !== 1 ? 's' : ''}`;
+      } else {
+        resultsCount.textContent = 'Showing all products';
+      }
+
+      return { slouchy: filteredSlouchy, ruffles: filteredRuffles, scrunchies: filteredScrunchies };
+    }
+
+    function updateProductDisplay() {
+      const filtered = filterProducts();
+      renderProducts('slouchy', filtered.slouchy);
+      renderProducts('ruffles', filtered.ruffles);
+      renderProducts('scrunchies', filtered.scrunchies);
+    }
+
+    // Add event listeners for search and filters
+    document.getElementById('product-search').addEventListener('input', updateProductDisplay);
+    document.getElementById('category-filter').addEventListener('change', updateProductDisplay);
+    document.getElementById('price-filter').addEventListener('change', updateProductDisplay);
+
     // Display products on page load
     renderProducts('slouchy', products.slouchy);
+    renderProducts('ruffles', products.ruffles);
     renderProducts('scrunchies', products.scrunchies);
   </script>
 </body>

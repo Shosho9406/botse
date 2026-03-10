@@ -1,6 +1,20 @@
 // Global products reference
 let allProducts = [];
 
+// Discount codes configuration
+const discountCodes = {
+  'NEWSLETTER10': { type: 'percentage', value: 10, description: '10% off for newsletter subscribers' },
+  'WELCOME15': { type: 'percentage', value: 15, description: '15% welcome discount' },
+  'SAVE20': { type: 'percentage', value: 20, description: '20% special savings' }
+};
+
+// Validate discount code
+function validateDiscountCode(code) {
+  if (!code || !code.trim()) return null;
+  const upperCode = code.trim().toUpperCase();
+  return discountCodes[upperCode] || null;
+}
+
 // Client-side JS to handle orders and payments
 document.addEventListener('DOMContentLoaded', async () => {
   // Load all products first
@@ -30,6 +44,7 @@ function initializeOrderForm() {
   const productSelect = document.getElementById('product');
   const variantInput = document.getElementById('variant');
   const quantityInput = document.getElementById('quantity');
+  const discountCodeInput = document.getElementById('discountCode');
   const resultDiv = document.getElementById('result');
   const priceInfo = document.getElementById('priceInfo');
   const unitPriceSpan = document.getElementById('unitPrice');
@@ -56,6 +71,7 @@ function initializeOrderForm() {
 
     const variant = variantInput.value || '';
     const quantity = Math.max(1, parseInt(quantityInput.value) || 1);
+    const discountCode = discountCodeInput.value.trim();
 
     let unitPrice = 0;
     if (variant && product.prices[variant]) {
@@ -68,11 +84,24 @@ function initializeOrderForm() {
       unitPrice = Object.values(product.prices)[0] || 0;
     }
 
-    const total = unitPrice * quantity;
+    let subtotal = unitPrice * quantity;
+    let discountAmount = 0;
+    let discountInfo = '';
+
+    // Apply discount if valid code is entered
+    const discount = validateDiscountCode(discountCode);
+    if (discount) {
+      if (discount.type === 'percentage') {
+        discountAmount = Math.round((subtotal * discount.value / 100) * 100) / 100;
+        discountInfo = ` (${discount.value}% off: -R${discountAmount.toFixed(2)})`;
+      }
+    }
+
+    const total = subtotal - discountAmount;
     const deposit = Math.round((total * 0.5) * 100) / 100;
 
     unitPriceSpan.textContent = unitPrice.toFixed(2);
-    totalPriceSpan.textContent = total.toFixed(2);
+    totalPriceSpan.textContent = total.toFixed(2) + discountInfo;
     depositPriceSpan.textContent = deposit.toFixed(2);
     priceInfo.style.display = 'block';
   }
@@ -80,6 +109,7 @@ function initializeOrderForm() {
   productSelect.addEventListener('change', updatePrice);
   variantInput.addEventListener('input', updatePrice);
   quantityInput.addEventListener('change', updatePrice);
+  discountCodeInput.addEventListener('input', updatePrice);
 
   // Form submission
   form.addEventListener('submit', async (e) => {

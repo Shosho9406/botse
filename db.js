@@ -18,6 +18,9 @@ db.serialize(() => {
       variant TEXT,
       quantity INTEGER,
       unitPrice REAL,
+      subtotal REAL DEFAULT 0,
+      discountCode TEXT DEFAULT '',
+      discountAmount REAL DEFAULT 0,
       total REAL,
       name TEXT,
       phone TEXT,
@@ -33,17 +36,23 @@ db.serialize(() => {
   db.run(`ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'pending'`, () => {});
   db.run(`ALTER TABLE orders ADD COLUMN paymentReceived INTEGER DEFAULT 0`, () => {});
   db.run(`ALTER TABLE orders ADD COLUMN depositAmount REAL DEFAULT 0`, () => {});
+  db.run(`ALTER TABLE orders ADD COLUMN subtotal REAL DEFAULT 0`, () => {});
+  db.run(`ALTER TABLE orders ADD COLUMN discountCode TEXT DEFAULT ''`, () => {});
+  db.run(`ALTER TABLE orders ADD COLUMN discountAmount REAL DEFAULT 0`, () => {});
 });
 
 function insertOrder(order) {
   return new Promise((resolve, reject) => {
-    const stmt = db.prepare(`INSERT INTO orders (productId, productName, variant, quantity, unitPrice, total, name, phone, address, notes, createdAt, status, paymentReceived, depositAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
+    const stmt = db.prepare(`INSERT INTO orders (productId, productName, variant, quantity, unitPrice, subtotal, discountCode, discountAmount, total, name, phone, address, notes, createdAt, status, paymentReceived, depositAmount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
     stmt.run(
       order.productId,
       order.productName,
       order.variant,
       order.quantity,
       order.unitPrice,
+      order.subtotal || order.total,
+      order.discountCode || '',
+      order.discountAmount || 0,
       order.total,
       order.name,
       order.phone,
