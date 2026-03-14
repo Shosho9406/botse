@@ -5,6 +5,7 @@ let allProducts = [];
 const discountCodes = {
   'NEWSLETTER10': { type: 'percentage', value: 10, description: '10% off for newsletter subscribers' },
   'WELCOME15': { type: 'percentage', value: 15, description: '15% welcome discount' },
+  'WELCOME30': { type: 'percentage', value: 30, description: '30% welcome discount' },
   'SAVE20': { type: 'percentage', value: 20, description: '20% special savings' }
 };
 

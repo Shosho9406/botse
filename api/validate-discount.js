@@ -17,7 +17,16 @@ export default function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { code } = req.body || {};
+  let body = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch (e) {
+      return res.status(400).json({ error: 'Invalid JSON' });
+    }
+  }
+
+  const { code } = body || {};
   const discount = validateDiscountCode(code);
   if (discount) {
     res.status(200).json(discount);
